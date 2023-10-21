@@ -1,7 +1,7 @@
 ---
 layout: post
 title: What is Money? An answer from symmetry.
-date: 2021-04-16 15:09:00
+date: 2023-10-19 15:00:00
 description: Where does money come from? How to understand it? A surprising answer comes from symmetry.
 tags: symmetry
 categories: finance
@@ -25,9 +25,9 @@ Ever wondered what money is and where it comes from?
 How to answer a daunting, nebulous question like *what is money?* 
 * It helps to ask a simpler, concrete question and try to answer it
 * My concrete question was
-    <blockquote>
-    What happens when the bank lends John Doe money for a mortgage?
-    </blockquote>
+    > What happens when the bank lends John Doe money for a mortgage?
+    {: .block-danger}
+    
 * This question turned out to be both deceptively difficult and incredibly insightful.
 
 If you poll a few people, arguments often proceed like this:
@@ -85,9 +85,7 @@ With this in mind, we are ready to probe some standard liabilities we encounter.
 |Checking account at JPM|JP Morgan Bank|On demand, you can withdraw US$ upto your account limit|
 |Checking account at BofA|BofA|On demand, you can withdraw US$ upto your account limit|
 
-<blockquote>
-Note: US$ is still Fed's liability. JPM cannot print it. So, when John Doe withdraws US$ from a checking account, JPM has to fetch the US$ from the Fed to give it to John Doe. JPM's checking account merely promises that on-demand it will be able to obtain those US$. It is entirely possible that JPM fails to honor this promise. So, 100$ in JPM checking account is not the same thing as 100$ in BofA checking account. All you have in the checking account is the respective banks' promises and NOT US$.
-</blockquote>
+> Note: US$ is still Fed's liability. JPM cannot print it. So, when John Doe withdraws US$ from a checking account, JPM has to fetch the US$ from the Fed to give it to John Doe. JPM's checking account merely promises that on-demand it will be able to obtain those US$. It is entirely possible that JPM fails to honor this promise. So, 100$ in JPM checking account is not the same thing as 100$ in BofA checking account. All you have in the checking account is the respective banks' promises and NOT US$.
 
 We colloquially say **printing** when an Issuer issues liabilities. For example, Apple can print more stock and dilute existing stock. Similarly, the Fed can print more US$ and dilute the existing US$.
 <hr>
@@ -124,24 +122,40 @@ To simplify, the 'first money' - the US$ - is created by the Fed as its liabilit
 <hr>
 
 # So, what's Money?
-After that understanding of contracts & liabilities, we can now answer what Money is. To a good approximation, 
-* Money just includes a subset of liabilities of banks and the Federal Reserve
-* Banks are special institutions - they can enter financial contracts and create new deposit liabilities via loans (like mortgages)
-* There are different measures of money, M1, M2 etc and they each pick a different subset of bank & Fed liabilities to include. The details are not important for us right now. 
+After that understanding of contracts & liabilities, we can now answer what Money is.
+
+> To a good approximation, 
+> * Money just includes a subset of liabilities of banks and the Federal Reserve
+> * Banks & Fed are special institutions: Banks create new deposit liabilities via loans and Federal Reserve creates US$ liabilities
+> * There are different measures of money, M1, M2 etc and they each pick a different subset of bank & Fed liabilities to include. The details are not important for us right now. 
+{: .block-tip}
 
 Even though banks are special in terms of regulation, banking itself is not. Setting aside regulations, 
 * John Doe can maintain his own ledger of checking accounts like a bank if enough customers believe in his ability to on-demand pay them
 * John Doe can also issue loans (again, just a matter of keeping accounts) if enough people believe in his ability to on-demand pay their checking accounts
 * Banks just happen to be certified institutions and operate under important constraints on how many loans they can dole out among others.
 
-<blockquote>Money is some subset of liabilities of the banks and the Federal Reserve. M1 money, M2 money, M3 money each includes a different subset.</blockquote>
 <hr>
 
-## Rules to remember
+# Conclusion
 
-* Your assets are somebody else's liabilities.
-* US$ is the Fed's liability, not the US Govt's. Fed is ostensibly an independent entity distinct the US Govt.
-* Democracy and mass bankruptcy are incompatible. So, when a large pct of population is in strife, Democracy (indirectly) votes for currency printing.
+Let's conclude with a summary and some follow-ups.
+
+> ## Takeaways
+> 
+> * A Liability is just a promise - everybody can create one, but it acquires value only when it can be exchanged for another liability. This exchange of Liabilities is a Contract.
+>   * For every liability, there is a clear **Issuer** and a clear definition of what the liability entails
+>   * US$ is the Fed's liability, not the US Govt.'s. Fed is ostensibly an independent entity distinct the US Govt
+>   * It just so happens that most human contracts (like mortagages) are written in US$; they could also be written in any other liability, like Gold, Bitcoin or JPM Checking Account etc.
+> * Your assets are always somebody else's liabilities
+>   * 100 US$ in JPM checking account is not the same as 100 US$ in BofA checking account - they are both liabilities of the respective banks
+>   * Human knowledge of natural sciences is a fantastic asset because it is mother nature's liability which she honors in eternity with close to 0 performance risk. Most human contracts are very limited in their time. There's a risk that humans misunderstood the liability (for e.g. Newton's laws are inaccurate), but that is not mother nature's responsibility
+> * Democracy and mass bankruptcy are incompatible
+>    * When a large pct of population is unable to honor their contracts (like mortages), Democracy votes (indirectly) for printing Govt. legal tender (like US$)
+>    * Since most contracts are written in US$, cheapening US$ makes it easier to honor the contract
+>    * So, naturally all Democratic Fiat currencies tend to 0 over time
+>    * Since they cannot be cheapened on demand, hard currencies like Gold & Bitcoin can force massive bankruptcies for citizens settling contracts in them; this appears to be the lived history on the Gold standard.
+{: .block-tip}
 
 ## Follow-up questions
 Armed with this knowledge, we can ask a bunch of follow-up questions. We can offer very reasonable answers to these questions but they are posts in their own right.
