@@ -26,7 +26,7 @@ How to answer a daunting, nebulous question like *what is money?*
 * It helps to ask a simpler, concrete question and try to answer it
 * My concrete question was
     > What happens when the bank lends John Doe money for a mortgage?
-    {: .block-danger}
+    {: .block-warning}
     
 * This question turned out to be both deceptively difficult and incredibly insightful.
 
@@ -48,49 +48,70 @@ I am not willing to accept that somehow this circularity works itself out; for o
 
 <hr>
 
-## Breaking the circularity using Symmetry
+## Breaking circularity using Symmetry
 
-The root of the circular argument is the asymmetric nature of the mortgage transaction. Pay attention to the wording: "The bank **gave** John Doe money.". This is an asymmetric relation. As long as there's a giver and a taker, we'll continue to run into circular arguments.
+The root of the circular argument appears to be the asymmetric nature of the mortgage transaction. Pay attention to how we describe it: `The bank gave John money`. This is an [asymmetric relation](https://en.wikipedia.org/wiki/Asymmetric_relation) because if we swap the bank and John, the statement would no longer be true `John gave the bank money`.
 
 This observation prompts the key question: 
-<blockquote>How can we describe the mortgage transaction using symmetric wording? That is, there's no longer a money lender & money receiver. </blockquote> 
+>How can we describe the mortgage transaction as a Symmetric relationship; that is, if we swap the Bank and John, the description should still be true ?
+{:.block-warning}
 
-My first attempt was quite simple and also turns out to be satisfactory.
-<blockquote>The bank and John enter a contract. A contract imposes an obligation - aka liability - on both parties.</blockquote>
+My first attempt at answering this also turned out to be insightful.
+>The bank and John enter a contract. Alternatively, John and the Bank owe each other something.
+><br> 
+><br> 
+>Note how the statement is symmetric. Swapping bank and John in the statement doesn't change it!
+{:.block-tip}
 
-That's symmetric alright. But, what is the contract here and what is the obligation on each party?
+That's symmetric alright. But, what do they owe each other? This line of inquiry proved productive.
 
 <hr>
 
-## Contracts: Assets and Liabilities
+## Liabilities, Contracts and Assets
 
-A two-party contract imposes liabilities on both the parties. This brings us to two key realizations
-* Everyone can promise a liability. But, it is useless until there's a contract to exchange it with some other liability - this exchange of liabilities defines the contract.
-* All your assets are somebody's liabilities
+The symmetric answer can be simply restated as: **In any transaction like the mortgage, the two parties are exchanging obligations.**. 
+
+Upon some reflection, we can arrive at the following insights, which we'll explore in this section:
+* Everyone can create/make a promise aka obligation
+  * Liability is just another name for this promise
+  * Liability is the most primitive economic unit in any society. It costs nothing to make a promise - the trouble is finding someone to accept your promise! 
+* Two parties can decide to accept each other's Liability
+  * This exchange of liabilities is a Contract
+  * Economy runs on Contracts
+* One party's liability is the other party's asset
+  * All your assets are somebody's liabilities!
+  * This may be surprising, but it really is so! Some liabilities have such low performance risk we don't even contemplate non-performance
 <hr>
 
 ### Common Liabilities
-With this in mind, we are ready to probe some standard liabilities we encounter. For each liability, we should be able to ask: **Who is the liability issuer & what does that liability promise?**. For example, we can ask **Who issues the US$ liability and what do they promise to the holder?**
+With this in mind, we are ready to probe some standard liabilities we encounter. For each liability, we should be able to ask: 
+* Who is the liability issuer?
+* What does that liability promise?
+* Is there a risk of non-performance? 
 
-|Liability|Issuer|Liability of the issuer|
-|:---|:---|:---|
-|US Govt. bond| US Treasury | A US Govt. bond pays interest & principal to the holder at a pre-determined schedule|
-|US Dollar | Federal Reserve (Fed)| If you present 10$, Fed promises to give you 2x5$ (as funny as it sounds). The other implicit obligation is that the US Govt. accepts it as legal tender for tax payments. Other than that, there's nothing that the Fed promises on its US$ liability to a good approximation. They can print more of it with relatively little interference. |
-|Apple Stock| Apple Corporation |Apple corp promises to share dividends equally across all equity holders & guarantees equal voting rights. Note: There's no promise that any dividends will be paid - it only legally guarantees equal share in dividends and voting.|
-|Apple Corporate Bond| Apple Corporation | Similar to any bond: Apple Corp promises to pay interest & principal at a predetermined schedule.|
-|Chair| Chair manufacturer | The chair allows you to sit on it for some number of years. |
-|Gold|Mother nature|It's chemical properties of inertness will be maintained through millennia. There's no guarantee from mother nature that Gold will be valued at a certain US$ price or higher over time.|
-|Bitcoin|Bitcoin Network|A mined bitcoin will be perpetually verifiable and new bitcoins will only be issued using an algorithm.|
-|Laws of Physics|Mother nature|The Laws of physics work similarly everywhere. It is possible that humans understand some laws incorrectly; that is a human fault.|
-|Checking account at JPM|JP Morgan Bank|On demand, you can withdraw US$ upto your account limit|
-|Checking account at BofA|BofA|On demand, you can withdraw US$ upto your account limit|
+Liability|Issuer|Liability of the issuer|Non-performance Risk
+:---|:---|:---|:---
+US Govt. bond| US Treasury | A US Govt. bond pays interest & principal to the holder at a pre-determined schedule| Missed payments and/or principal.
+US Dollar | Federal Reserve (Fed)| If you present 10$, Fed promises to give you 2x5$ (as funny as it sounds). The other implicit obligation is that the US Govt. accepts it as legal tender for tax payments. So, in that sense, it is a co-liability between the Fed & the Treasury. Other than that, there's nothing that the Fed promises on its US$ liability to a good approximation. They can print more of it with relatively little interference. | The Fed itself can always perform (exchanging 10$ for 2x5$), but US Treasury may accept a competing legal tender, can abolish taxes reducing need for US$ etc
+Apple Stock| Apple Corporation |Apple corp promises to share dividends equally across all equity holders & guarantees equal voting rights. Note: There's no promise that any dividends will be paid - it only legally guarantees equal share in dividends and voting.| Unlikely, but legal changes may allow Apple Corporation to discrimnate between equity holders, preferentially paying dividends to only a few, for e.g.
+Apple Corporate Bond| Apple Corporation | Similar to any bond: Apple Corp promises to pay interest & principal at a predetermined schedule.| Missed payments and/or principal
+Chair| Chair manufacturer | The chair allows you to sit on it for some number of years. | Chair doesn't work as advertised or breaks down quickly etc.
+Gold|Mother nature|It's chemical properties of conductivity & inertness will be maintained through millennia; new Gold can only be synthesised in supernovae, etc. There's no guarantee from mother nature that Gold will be valued at a certain US$ price or higher over time. That is a human group-think phenomenon. | This is a tricky one. Gold's properties are not directly guaranteed by mother nature (we can't sue her!), but reflect our current understanding. It is entirely possible that humans misunderstood mother nature and discover later on that Gold has a half life and /or can be synthesized in lab, both of which will erode some of its important properties
+Bitcoin|Bitcoin Network|A mined bitcoin will be perpetually verifiable and new bitcoins will only be issued using an algorithm.| Similar to gold, there's no party to sue. It is entirely possible that the mining network suffers a Byzantine attack.
+Laws of Physics|Mother nature|The Laws of physics work similarly everywhere | It is possible that humans understand some laws incorrectly; that is a human fault not really mother nature's. But this is also a sort of co-liability: humans try to understand mother nature's rules with the expectation that such rules indeed exist.
+Checking account at JPM|JP Morgan Bank|On demand, you can withdraw US$ upto your account limit| JPM does not let you withdraw US$ on demand
+Checking account at BofA|BofA|On demand, you can withdraw US$ upto your account limit| BofA does not let you withdraw US$ on demand
 
-> Note: US$ is still Fed's liability. JPM cannot print it. So, when John Doe withdraws US$ from a checking account, JPM has to fetch the US$ from the Fed to give it to John Doe. JPM's checking account merely promises that on-demand it will be able to obtain those US$. It is entirely possible that JPM fails to honor this promise. So, 100$ in JPM checking account is not the same thing as 100$ in BofA checking account. All you have in the checking account is the respective banks' promises and NOT US$.
+> **Note**: US$ is still Fed's liability. JPM cannot print it. So, when John Doe withdraws US$ from a checking account, JPM has to fetch the US$ from the Fed to give it to John Doe. JPM's checking account merely promises that on-demand it will be able to obtain those US$. It is entirely possible that JPM fails to honor this promise. So, 100$ in JPM checking account is not the same thing as 100$ in BofA checking account. All you have in the checking account is the respective banks' promises and NOT US$.
+{:.block-warning}
+
+> **Note**: ALL liabilities carry a non-performance risk. In some cases like a Chair or a Checking Account, it is easy to imagine non-performance. In other cases like US$, it is harder to imagine, but a non-performance risk absolutely exists.
+{:.block-warning}
 
 We colloquially say **printing** when an Issuer issues liabilities. For example, Apple can print more stock and dilute existing stock. Similarly, the Fed can print more US$ and dilute the existing US$.
 <hr>
 
-### Common Contracts
+### Contracts: Exchange of Liabilities
 Contracts are just an exchange of liabilities. Typically there are two parties. Some examples to illustrate.
 
 |Contract|Party 1 & Obligation | Party 2 & Obligation|
@@ -100,10 +121,10 @@ Contracts are just an exchange of liabilities. Typically there are two parties. 
 
 <hr>
 
-### Your assets are somebody's liabilities
-A contract is simply an exchange of liabilities. But, it creates both an asset and liability. Let's take the mortgage example.
+### Assets: Somebody's liabilities
+A contract is simply an exchange of liabilities. However, it creates both an asset and liability for both parties. In fact, **all assets are somebody's liabilities**.
 
-Consider the $1M exchange
+Consider the $1M mortgage example
 
 |Party|Liability|Asset|
 |:---|:---|:---|
@@ -117,7 +138,27 @@ As you can see, the contract confers both an asset and a liability to both parti
 
 The fundamental unit of the economy is contracts. Something as simple as buying a chair involves a contract. John Doe sends US$ (Fed's liability) and the manufacturer sends the chair (manufacturer's liability) with a promise that it will work as advertised. If the chair doesn't, it perhaps comes with a warranty which is analogous to credit risk in a bond. 
 
-To simplify, the 'first money' - the US$ - is created by the Fed as its liability. Most money is just bank credit & it gets created by a bank on demand. For example, when John buys a chair using his credit card, JPM simply creates a liability for John and credits the chair manufacturer's checking account. No US$ is involved at all. So, there's no notion of circularity anymore. There's no confusion on how money's circulating - it is not going round & round; it is just being created freshly. There's a bit more to this story, including what happens when the chair manufacturer's account is in BofA & John's card is JPM - it does involve transferring US$ (so called reserves) from JPM to BofA but in the background.
+Most money is just bank credit & it gets created by a bank on demand. For example, when John buys a chair using his credit card, JPM simply creates a liability for John and credits the chair manufacturer's checking account. No US$ is involved at all.
+
+There's a bit more to this story, including what happens when the chair manufacturer's account is in BofA & John's card is JPM - it does involve transferring US$ (so called reserves) from JPM to BofA but in the background.
+
+> The economy is NOT dependent on a circular rotation of some limited resource called money, but it progresses via a SEQUENCE of contracts. There's no confusion on how money's circulating - it is not going round & round; it is just being created freshly. New contracts (e.g. credit) may be created to service old contracts. 
+{:.block-tip}
+
+## Illustration: Treasury Transfer payments
+
+What happens when the Treasury makes transfer payments (i.e. free distributions) to citizens? To a good approximation, this is what happens
+* The Treasury holds its checking account with the Fed. It's called TGA (Treasury General Account)
+* Treasury instructs the Fed to transfer $1000 from its TGA to JPM for the benefit of John Doe
+* Fed transfers $1000 from TGA to JPM
+* JPM credits $1000 to John Doe's checking account
+
+You may have noticed that there are a bunch of uni-directional transfers which contradicts our insistence that each Contract (or Transaction) is an exchange of Liabilities! It turns out that our theory correctly predicts the existence of offsetting liabilities. So, I depict each transaction as an exchange of liabilities. The *fictional* Goodwill liability of John Doe is quite a standard accounting entity.
+
+> Note: This is an approximation to help our understanding. The actual balance sheet entries are likely different.
+{:.block-danger}
+
+{% include figure.html path="assets/img/Treasury-Transfer-to-John-Doe-Balance-sheet-impact.svg" class="img-fluid rounded z-depth-1" zoomable=true %}
 
 <hr>
 
@@ -137,9 +178,18 @@ Even though banks are special in terms of regulation, banking itself is not. Set
 
 <hr>
 
-# Conclusion
+# Outro
 
-Let's conclude with a summary and some follow-ups.
+Phew, that was a lot. This section starts with a recap and concludes with some takeaways and follow-up questions.
+
+## Recap
+
+A quick recap of the entire thought process from beginning to end
+* I started with the question `What is money?`
+* To make progress, I asked a strawman question `What happens when John Doe takes a mortgage?`
+* Even after more than an year of pondering on and off, I couldn't answer the strawman convincingly
+* Eventually, I added a constraint: any answer to this question must only use symmetric phrases - banning asymmetric phases like give, take, lend, owe, etc.
+* As it turned out, this symmetry constraint unlocked the whole mystery & within a matter of an hour, the primary concepts all became clear
 
 > ## Takeaways
 > 
@@ -151,16 +201,23 @@ Let's conclude with a summary and some follow-ups.
 >   * 100 US$ in JPM checking account is not the same as 100 US$ in BofA checking account - they are both liabilities of the respective banks
 >   * Human knowledge of natural sciences is a fantastic asset because it is mother nature's liability which she honors in eternity with close to 0 performance risk. Most human contracts are very limited in their time. There's a risk that humans misunderstood the liability (for e.g. Newton's laws are inaccurate), but that is not mother nature's responsibility
 > * Democracy and mass bankruptcy are incompatible
->    * When a large pct of population is unable to honor their contracts (like mortages), Democracy votes (indirectly) for printing Govt. legal tender (like US$)
+>    * When a large pct of population is unable to honor their contracts (like mortages), Democracy votes (indirectly) for reducing the contract burden
 >    * Since most contracts are written in US$, cheapening US$ makes it easier to honor the contract
->    * So, naturally all Democratic Fiat currencies tend to 0 over time
->    * Since they cannot be cheapened on demand, hard currencies like Gold & Bitcoin can force massive bankruptcies for citizens settling contracts in them; this appears to be the lived history on the Gold standard.
+>    * Naturally, all Democratic Fiat currencies tend to 0 over time
+>    * Since they cannot be cheapened on demand, hard currencies like Gold & Bitcoin can force massive bankruptcies & recessions; this appears to be the lived history on the Gold standard.
 {: .block-tip}
 
 ## Follow-up questions
 Armed with this knowledge, we can ask a bunch of follow-up questions. We can offer very reasonable answers to these questions but they are posts in their own right.
-* What is a good economy? Hint: One that's confidently entering a lot of contracts!
-* Is bitcoin better than US$ for the economy? Hint: Does it help enter more contracts? What happens during a recession - is it good or bad that Fed can print US$?
-* What is Quantitave Easing? Is it a good or bad experiment? Hint: QE involves Fed printing US$ and buying US Treasuries and private citizen Mortgage obligations.
-* Why do most people still talk about money in "lender/receiver" terms when there's just a contract? Hint: It is a relic of the Gold standard. Gold was the only money at some point and a loan amounted to transferring Gold from the bank to the person.
-* Will a Govt. ever pay back its debt? Hint: No, not in the way a Gold based debt would need to be paid back.
+* What is a good economy?
+  * Hint: One that's confidently entering a lot of contracts!
+* Is bitcoin better than US$ for the economy?
+  * Hint: Does it help enter more contracts? What happens during a recession - is it good or bad that Fed can print US$?
+* What is Quantitave Easing?
+  * Is it a good or bad experiment? Hint: QE involves Fed printing US$ and buying US Treasuries and private citizen Mortgage obligations.
+* Why do most people still talk about money in "lender/receiver" terms when there's just a contract?
+  * Hint: It is a relic of the Gold standard. Gold was the only money at some point and a loan amounted to transferring Gold from the bank to the person.
+* Will a Govt. ever pay back its debt?
+  * Hint: No, not in the way a Gold based debt would need to be paid back.
+* What do analysts mean when they say `cash on the sidelines`?
+  * Hint: this is an oxymoron!
