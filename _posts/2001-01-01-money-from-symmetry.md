@@ -1,6 +1,6 @@
 ---
 layout: post
-title: What is Money? An answer from symmetry.
+title: What is Money? Where does it come from? An answer from symmetry.
 date: 2023-10-19 15:00:00
 description: Where does money come from? How to understand it? A surprising answer comes from symmetry.
 tags: symmetry

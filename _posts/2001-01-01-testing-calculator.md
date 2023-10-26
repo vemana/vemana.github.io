@@ -15,9 +15,150 @@ _styles: >
  }
 ---
 
-> This is a DRAFT post. Read at your own risk!
-{:.block-danger}
+# 5 minute summary
 
+For a calculator `evaluate` function:
+
+```java
+long evaluate(Expression input, VariableMap variables) {...}
+```
+operating on AST
+```java
+sealed interface Expression {
+  record Addition(Expression left, Expression right) implements Expression {}
+  record Multiplication(Expression left, Expression right) implements Expression {}
+  record Division(Expression left, Expression right) implements Expression {}
+  record Number(long value) implements Expression {}
+  record Variable(String id) implements Expression {}
+}
+```
+
+Don't write it like this (let's give it a name: **Natural Impl**):
+```java
+long evaluate(Expression input, VariableMap variables) {
+  return switch(input) {
+    case Number(value) -> value;
+    case Variable(id) -> variables.getVariableValue(id);
+    case Addition(left, right) -> evaluate(left, variables) + evaluate(right, variables);
+    case Multiplication(left, right) -> evaluate(left, variables) * evaluate(right, variables);
+    case Division(left, right) -> evaluate(left, variables) / evaluate(right, variables);
+  };
+}
+```
+
+Write it like this instead (let's give it a name: **Homomorphic impl** for reasons explained later):
+```java
+// Since the thrust of this post is testing, we'll not comment on 
+// 1. Efficiency. For example, boxing, varargs overheads here. 
+//    There are many ways to mitigate them.
+// 2. Error handling. What if an Addition node has > 2 children? Or dividing by 0? 
+//    Again, there are many options.
+
+interface Operator {
+  long invoke(long... children);
+}
+
+class Evaluator {
+  
+  static final Operator PLUS = vals -> vals[0] + vals[1];
+  static final Operator MULTIPLY = vals -> vals[0]*vals[1];
+  static final Operator DIVIDE = vals -> vals[0]/vals[1];
+
+  // This is our evaluate function implementation
+  static long evaluate(Expression node, VariableMap varMap) {
+    return operator(node, varMap)
+        .invoke(children(node)
+                    .map(child -> evaluate(child, varMap))
+                    .mapToLong(x -> x)
+                    .toArray());
+  }
+
+  static operator(Expression node, VariableMap varMap) {
+    return switch(node) {
+      case Number(v) -> _ -> v;
+      case Variable(id) -> _ -> varMap.getVariableValue(id);
+      case Addition(_, _) -> PLUS;
+      case Multiplication(_, _) -> MULTIPLY;
+      case Division(_, _) -> DIVIDE;
+    };
+  }
+
+  static Stream<Expression> children(Expression node) {
+    return switch(node) {
+      case Number(v) -> Stream.of(); // empty
+      case Variable(id) -> Stream.of(); // empty
+      case Addition(left, right) -> Stream.of(left, right);
+      case Multiplication(left, right) -> Stream.of(left, right);
+      case Division(left, right) -> Stream.of(left, right);
+    };
+  }
+}
+```
+
+and write the following tests:
+```
+// One basics test per Node (like Addition, Multiplication)
+expect(7, "a", {a = 7}); // Variable
+expect(9, 9, {});        // Number
+expect(11, "1+10", {});  // Addition
+expect(12, "3*4", {});   // Multiplication
+expect(2, "4/2", {});    // Division
+
+// One test per Corner case per Node
+expect_failure("1/0", {});
+```
+
+With a Homomorphic Impl, **you can confidently skip complex tests** - like those that use arg depths > 1.
+```
+// Complex tests (arg depth > 1): can be skipped with homomorphic implementation
+expect(203, "10*20+a", {a=3});
+expect(18, "a*b+(3*2)", {a=3, b=4});
+```
+
+## Wait, what is a Homomorphic Impl?
+This code exploits the fact that the `evaluate` function is a [Homomorphism](https://en.wikipedia.org/wiki/Homomorphism) to separate tree traversal from operator application. So, each node defines its **Operator** function (PLUS, MULTIPLY etc.) and there's a separate evaluator that traverses the Expression tree and invokes the Operators. Contrast this with the **Natural Impl** where the traversal is intertwined with the Operator application. This sort of coupling doesn't age well - see [Why prefer a Homomorphic Impl](#why-prefer-a-homomorphic-impl).
+
+## Why prefer a Homomorphic Impl?
+There are many benefits to exploiting homomorphism.
+* **[Test minimalism]** 
+  * Write a minimal number of tests. 
+  * No need to write complex argument tests. We can prove rigorously that they are not needed; but it is ok to write one single test with a complex expression
+* **[Ageable code]**. Homomorphic Impl ages well along many important dimensions of change
+  * Introduce parallelism easily if required. Doing this with Natural Impl gets very messy very quick
+  ```java
+  // Showing only the changed parts.
+
+    static long evaluate(Expression node, VariableMap varMap) {
+      try(var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+          return evaluate(node, varMap);
+      }
+    }
+
+    static long evaluate(Expression node, VariableMap varMap, StructuredTaskScope scope) {
+      var childResults = children(node)
+                             .map(child -> scope.fork(() -> evaluate(child, varMap)))
+                             .toList();
+      scope.join();
+      return operator(node, varMap)
+          .invoke(childResults.stream()
+                      .map(Future::resultNow)
+                      .mapToLong(x -> x)
+                      .toArray());
+    }
+  ```
+  * Homomorphic Impl has O(1) calls to `evaluate` but Natural Impl has O(Nodes) calls to `evaluate`
+    * Here, to be exact, Homomorphic Impl has 2 calls to `evaluate` while Natural Impl has 6 of them (2 each for addition, multiplication, division operators)
+    * Reducing calls to the API surface is extremely useful. For example, consider changing the API signature to pass one more parameter. It requires 2 changes in Homomorphic Impl but 6 changes in Natural Impl. This adds up quickly when you have 20 Operators instead of 5.
+  * Add new operators with ease
+    * For example, it is trivial to add the SUBTRACTION operator
+    * Code remains easy to read even with 20 operators, while the Natural Impl starts becoming unwieldy at say 10
+  * Handoffs to different owners are relatively straightforward to explain  
+
+## Summary of the summary!
+
+There's a class of functions called Homomorphisms that can be coded in a certain pattern - the Homomorphic Impl - which requires only a small number of tests to gain confidence. The pattern also ages well to many typical changes. Homomorphisms are VERY common if you know to look for them, but that's an entirely different post.
+
+<hr>
 # Introduction
 
 All good quality Software has tests. But, there's the age old question faced by every software engineer:
@@ -28,13 +169,13 @@ These are good questions that elicit non-committal, **it depends** answers that 
 
 ## Why care about eliminating test subjectivity and minimizing tests?
 
-In practice, good quality tests determine iteration & in turn product velocity. A lack of tests is a disaster in the making - any project of reasonable size grinds to a crawl without automated tests while a quality automated tests avoid `hostage to the code` situations. Rapid changes can be made & rolled out with confidence.
+High quality automated tests are essential for high quality software. Tests determine iteration & in turn product velocity. A lack of tests is a disaster in the making - any project of reasonable size grinds to a crawl without automated tests while their presence avoids `hostage to the code` situations. Rapid changes can be made & rolled out with confidence.
 
-It might be tempting to think that more tests are better than less. That is not so. Test minimialism is important because a large number of tests (for e.g. to obtain code coverage) carries significant costs - presubmit times balloon, tests tend to get coupled with code & changes to one piece of code breaks a large number of tests for no good reason.
+Test minimalism is important because a large number of tests (for e.g. to obtain code coverage) carries significant costs - presubmit times balloon, tests tend to get coupled with code & changes to one piece of code breaks a large number of tests for no good reason.
 
-Equally, subjectivity on what tests to write hinders productivity. It causes code review debates, missing tests (because there's no framework to think about them) which bite later, challenges in handovers to a different owners among others. Really, the list is endless.
+Test subjectivity - that is, what tests to write - hinders productivity. It causes code review debates, missing tests (because there's no framework to think about them) which bite later, difficulty in understanding which new tests to write when changing code, challenges in handovers to a different owners among others.
 
-There are plenty of other concerns that are topics for other posts. For example, once you decide to write a test (logically), how to write it cleanly in a way that conveys the intent of the test to any new maintainer?
+There are plenty of other concerns that are topics for other posts. For example, once you decide to write a test (logically), how to write it cleanly in a way that conveys the intent of the test to any new maintainer? Really the list is endless; one can barely scratch the surface of quality tests with a single post.
 
 > Perhaps the most important thing going for quality tests is this funnel: quality tests -> higher productivity -> less need to hire a ton -> less need to reduce the hiring bar -> maintain high revenue/employee -> happier employees -> growth for everyone.
 {:.block-warning}
@@ -85,7 +226,7 @@ Some example `Expression`s include `(a*10+b)/100` which corresponds to a AST tha
 So, now we are ready to restate the question.
 
 > **Concrete strawman question**: How to write a Calculator program where:
-> * The program implements a function `long evaluate(Expression input, Map<String, Long> variables);` that evaluates the expression
+> * The program implements a function `long evaluate(Expression input, VariableMap variables);` that evaluates the expression
 > * The program should be accompanied by tests
 > * The tests should give confidence that the implementation works
 > * The number of tests should be minimal
@@ -95,10 +236,10 @@ So, now we are ready to restate the question.
 
 It is natural to write a solution that looks like this:
 ```java
-long evaluate(Expression input, Map<String, Long> variables) {
+long evaluate(Expression input, VariableMap variables) {
   return switch(input) {
     case Number(value) -> value;
-    case Variable(id) -> variables.get(id);
+    case Variable(id) -> variables.getVariableValue(id);
     case Addition(left, right) -> evaluate(left, variables) + evaluate(right, variables);
     case Multiplication(left, right) -> evaluate(left, variables) * evaluate(right, variables);
     case Division(left, right) -> evaluate(left, variables) / evaluate(right, variables);
@@ -122,14 +263,14 @@ So far so good. But, the question remains: what tests to write & how many of the
 
 Each of these tests ostensibly tests something. #1 appears to test a complex expression, #2 appears to test a corner case, #3 appears to combine them both (corner case within a complex expression). The challenge is to be able to objectively say that a given number of tests are sufficient.
 
-## Characterizing the tests
+## Segmenting the tests
 
 After some reflection, it is natural to arrive at a segmentation of tests:
 
 Test Id & Description | Examples <br> Format: **Test Name: Example** | Count
 :--- | :--- | :------
-**[Per-node basic]**. <br> One basics test per Node type. <br> Node can be Addition, Variable, Multiplication, Number, Division | Addition basic: `expect(11, 10+a, {a=1})` <br>Multiplication basic: `expect(20, 10*a, {a=2})` | O(#Nodes)
-**[Per-node corner case]**. <br> One test per corner case per node. | Division corner case: `expect_failure("1/b",{b=0})` | O(#Nodes)
+**[Per-node basic]**. <br> One basics test per Node type. The arguments have depth 1. <br> Node can be Addition, Variable, Multiplication, Number, Division | Addition basic: `expect(11, 10+1, {})` <br>Multiplication basic: `expect(20, 10*2, {})` | O(#Nodes)
+**[Per-node corner case]**. <br> One test per corner case per node. | Division corner case: `expect_failure("1/0",{})` | O(#Nodes)
 **[Complex arguments]**. <br> One test involving a complex expression, potentially involving all the operators | Complex arguments: `expect(5, 1*2+9/a, {a=3})` | O(1), but unclear whether & which ones to write
 **[Per-node Complex arguments]**. <br> One complex expression test per Node type | Addition complex arguments: `expect(22, 1*2+10*(1*2), {})` <br> Multiplication complex arguments: `expect(15, (1+2)*(2+3), {})` | O(#Nodes). Unclear whether to writes and if so, which ones to write
 **[Per-node Complex arguments arg depth = K]**. <br> One complex arguments test per Node type. At least one of the arguments has a depth K. | Addition complex arguments, arg depth=3: `expect(29, 1*2*3*4 + 5, {})` | O(#Nodes). Unclear whether such tests should be written & if so, what arg-depths are acceptable
@@ -145,6 +286,17 @@ Even this simple example of a Calculator demonstrates the inherent difficulty in
 
 Segmentation is reasonable progress but we still haven't answered which tests to write and why those tests give us confidence in the implementation.
 
+## Skip complex argument tests?
+
+One might argue that complex arguments tests are not required because the code is recursively evaluating each child first and only passing its result to the parent operator. So, the complexity of the child argument is immaterial. This is certainly a reasonable argument & in fact, one this post will make towards the conclusion. But, there are some important reasons to continue investigating further:
+* [Special code structure] The testing strategy of skipping complex arguments is only valid when child evaluation results are passed to the parent
+  * When a code base is touched by many people, this requirement can easily get lost
+  * Often, at the point when the original author moves on, the code has this structure but no one else knows that it has that structure
+* [Node complexity and cardinality] Even if all the code base authors are familiar with the code structure, a large number of node types and/or complex node evaluations can make it hard to maintain the structure
+  * In the above example, we had 5 node types. In industrial strength applications - for e.g. translating a user query to sql - this factor can be more than 20
+  * Once we get above a few pages worth of the `evaluate` function, we'll need tools to help ensure that we are always evaluating the children recursively before applying the parent's operator
+
+If only we had some tools to help us maintain the structure! Then, we can simply skip the complex argument tests with confidence.
 <hr>
 
 # Slaying the strawman
@@ -170,7 +322,7 @@ Perhaps surprisingly, there is a way to approach this. But first we need a detou
 > <br>
 >
 > Consider a function which evaluates Nodes in a Tree (or directed acyclic graph more generally)
-> * Example: functions like those in the strawman question: `long evaluate(Expression node, Map<String, Long> vars)`
+> * Example: functions like those in the strawman question: `long evaluate(Expression node, VariableMap vars)`
 > * Such a function is either a homomorphism or not.
 >
 > It is a homomorphism if it has the following characteristics (to a good approximation)
@@ -222,7 +374,7 @@ class Evaluator {
   static long evaluate(Expression node, VariableMap varMap) {
     return operator(node, varMap)
         .invoke(children(node)
-                    .map(child -> evaluate(child, variables))
+                    .map(child -> evaluate(child, varMap))
                     .mapToLong(x -> x)
                     .toArray());
   }
@@ -255,16 +407,9 @@ With this structure, let's examine the tests again
 * **Per-node corner case** tests are required
 * All other tests (e.g. complex arguments) can be skipped
 
-In particular, all other complex argument tests can be skipped. This is because composition is triggered even for the simplest evaluations. At this point, it is reasonable to ask: is this additional code worth it? isn't it the same thing as the original attempt - just that the code is inline? Isn't the original attempt more compact & readable? All of these are legitimate questions that will be answered in [is it worth it?](#is-it-worth-it-) section.
-
-## Declaring victory over the Strawam
-
-We now have an approach.
-
-# Is it worth it ?
-
-Is this really worth it?
+In particular, all other complex argument tests can be skipped. This is because composition is triggered even for the simplest evaluations. At this point, it is reasonable to ask: is this additional code worth it? isn't it the same thing as the original attempt - just that the code is inline? Isn't the original attempt more compact & readable? All of these are legitimate questions that are answered in [Why prefer a Homomorphic Impl](#why-prefer-a-homomorphic-impl).
 
 # Conclusion
 
-In this post, I presented a class of functions called Homomorphic functions for which we can write a bare minimum of tests while obtaining full coverage, confidence & 
+See [Summary of the Summary](#summary-of-the-summary).
+
