@@ -108,51 +108,54 @@ expect(2, "4/2", {});    // Division
 expect_failure("1/0", {});
 ```
 
-With a Homomorphic Impl, **you can confidently skip complex tests** - like those that use arg depths > 1.
-```
-// Complex tests (arg depth > 1): can be skipped with homomorphic implementation
-expect(203, "10*20+a", {a=3});
-expect(18, "a*b+(3*2)", {a=3, b=4});
-```
+## What is a Homomorphic Impl?
+This code exploits the fact that the `evaluate` function is a **Homomorphism** [(wiki)](https://en.wikipedia.org/wiki/Homomorphism) to separate tree traversal from operator application. Despite the math terminology, Homomorphism [(in layman terms)](#homomorphisms) is a simple idea.
 
-## Wait, what is a Homomorphic Impl?
-This code exploits the fact that the `evaluate` function is a [Homomorphism](https://en.wikipedia.org/wiki/Homomorphism) to separate tree traversal from operator application. So, each node defines its **Operator** function (PLUS, MULTIPLY etc.) and there's a separate evaluator that traverses the Expression tree and invokes the Operators. Contrast this with the **Natural Impl** where the traversal is intertwined with the Operator application. This sort of coupling doesn't age well - see [Why prefer a Homomorphic Impl](#why-prefer-a-homomorphic-impl).
+In a Homomorphic Impl, each node defines its **Operator** function (PLUS, MULTIPLY etc.) and there's a separate evaluator that traverses the Expression tree and invokes the Operators. Contrast this with the **Natural Impl** where the traversal is intertwined with the Operator application in the body of the method impl. This sort of coupling doesn't age well - see [Why prefer a Homomorphic Impl](#why-prefer-a-homomorphic-impl).
 
 ## Why prefer a Homomorphic Impl?
 There are many benefits to exploiting homomorphism.
-* **[Test minimalism]** 
-  * Write a minimal number of tests. 
-  * No need to write complex argument tests. We can prove rigorously that they are not needed; but it is ok to write one single test with a complex expression
-* **[Ageable code]**. Homomorphic Impl ages well along many important dimensions of change
-  * Introduce parallelism easily if required. Doing this with Natural Impl gets very messy very quick
-  ```java
-  // Showing only the changed parts.
 
-    static long evaluate(Expression node, VariableMap varMap) {
-      try(var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-          return evaluate(node, varMap);
-      }
-    }
 
-    static long evaluate(Expression node, VariableMap varMap, StructuredTaskScope scope) {
-      var childResults = children(node)
-                             .map(child -> scope.fork(() -> evaluate(child, varMap)))
-                             .toList();
-      scope.join();
-      return operator(node, varMap)
-          .invoke(childResults.stream()
-                      .map(Future::resultNow)
-                      .mapToLong(x -> x)
-                      .toArray());
-    }
+**Test minimalism** 
+* With a Homomorphic Impl, **you can confidently skip complex tests** - like those that use arg depths > 1.
   ```
-  * Homomorphic Impl has O(1) calls to `evaluate` but Natural Impl has O(Nodes) calls to `evaluate`
-    * Here, to be exact, Homomorphic Impl has 2 calls to `evaluate` while Natural Impl has 6 of them (2 each for addition, multiplication, division operators)
-    * Reducing calls to the API surface is extremely useful. For example, consider changing the API signature to pass one more parameter. It requires 2 changes in Homomorphic Impl but 6 changes in Natural Impl. This adds up quickly when you have 20 Operators instead of 5.
-  * Add new operators with ease
-    * For example, it is trivial to add the SUBTRACTION operator
-    * Code remains easy to read even with 20 operators, while the Natural Impl starts becoming unwieldy at say 10
-  * Handoffs to different owners are relatively straightforward to explain  
+  // Complex tests (arg depth > 1): can be skipped with Homomorphic Impl
+  expect(203, "10*20+a", {a=3});
+  expect(18, "a*b+(3*2)", {a=3, b=4});
+  ```
+* We can prove rigorously that they are not needed; but it is fine to write one single complex expression test, just to be safe
+
+**Ageable code**. Homomorphic Impl ages well along many important dimensions of change.
+* Introduce parallelism easily if required. Doing this with Natural Impl gets very messy very quick
+```java
+// Showing only the changed parts.
+
+  static long evaluate(Expression node, VariableMap varMap) {
+    try(var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+        return evaluate(node, varMap);
+    }
+  }
+
+  static long evaluate(Expression node, VariableMap varMap, StructuredTaskScope scope) {
+    var childResults = children(node)
+                           .map(child -> scope.fork(() -> evaluate(child, varMap)))
+                           .toList();
+    scope.join();
+    return operator(node, varMap)
+        .invoke(childResults.stream()
+                    .map(Future::resultNow)
+                    .mapToLong(x -> x)
+                    .toArray());
+  }
+```
+* Homomorphic Impl has O(1) calls to `evaluate` but Natural Impl has O(Nodes) calls to `evaluate`
+  * Here, to be exact, Homomorphic Impl has 2 calls to `evaluate` while Natural Impl has 6 of them (2 each for addition, multiplication, division operators)
+  * Reducing calls to the API surface is extremely useful. For example, consider changing the API signature to pass one more parameter. It requires 2 changes in Homomorphic Impl but 6 changes in Natural Impl. This adds up quickly when you have 20 Operators instead of 5
+* Add new operators with ease
+  * For example, it is trivial to add the SUBTRACTION operator
+  * Code remains easy to read even with 20 operators, while the Natural Impl starts becoming unwieldy at say 10
+* Handoffs to different owners are relatively straightforward to explain  
 
 ## Summary of the summary!
 
