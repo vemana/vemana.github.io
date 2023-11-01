@@ -182,14 +182,14 @@ Even though banks are special in terms of regulation, banking itself is not. Set
 
 <hr>
 
-## FAQ
+# FAQ
 
-### Can we say that the Fed is the origin of money since it can print US$ without much restriction?
+## Can we say that the Fed is the origin of money since it can print US$ without much restriction?
 No. Economies existed long before the Fed and long before banks (barter system). A barter era contract might've looked like: `I promise to receive 1 bag of rice an year from now and deliver 1/2 bag of sugar 6 months from now`.
 
 One might ask, how can someone confidently make a contract to produce rice - where does this rice come from? The rice producer is bartering with the sugar producer on the one side, but on the other side is entering a contract with mother nature. Mother nature's liability is to produce rice while the farmer's liability is to work the land in a certain way (i.e. rice farming) that she dictates.
 
-### What was bank operation like, pre Fed?
+## What was bank operation like, pre Fed?
 
 Pre-Fed, to a decent approximation, Gold was the only money. Everything else was credit. The distinction was very clear and showed in bank operations.
 
@@ -212,7 +212,7 @@ If you wanted to transfer 1 oz. of Gold (i.e. money) from your account in bank A
 > Very important note: This system of Gold as money worked on the fundamental idea that Gold was scarce & could not be created.
 {:.block-warning}
 
-### Fed creation
+## Fed creation
 
 To a decent approximation, Fed was created as literally a big pile of Gold, a Reserve of Gold
 * To lend Gold as a last resort in a panic bank run situation
@@ -234,7 +234,7 @@ Bank Gold transfers moved to a hub & spoke model.You can think of it as:
 * The Reserve Account holds Gold
 * Instead of Bank A sending physical Gold to Bank Z, the Fed deducts from Reserve Account of A and credits it to B. No physical gold needs to move
 
-### Gold standard relics
+## Gold standard relics
 
 Mission Creep. A typical strategy for all business goes like this:
 * Somehow gain customers
@@ -266,7 +266,7 @@ Many people still talk about US Govt. debt as being repaid
 > There are some important nuances that I left out. The Fed is ostensibly an independent entity but the US President nominates the Fed Chairman of the Board of Governors. They can choose not to print US$ to lend to the Govt, but it will typically end up violating their dual mandate: Stable Employment and Stable prices. So, when the Govt. gets into trouble with debt repayment, employment gets into trouble as well and the Fed will end up cheapening the currency to turn the economy back (per their dual mandate); they cheapen it typically by reducing interest rates or by outright Quantitate Easing.
 {:.block-warning}
 
-### What is the contract between the banks and the Fed?
+## What is the contract between the banks and the Fed?
 There is no natural reason for the Fed and Banks to be tied together. But, they are today because of current and historical regulations. There's a lot of detail here but that's not relevant for this post.
 
 # Outro
