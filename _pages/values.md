@@ -32,26 +32,34 @@ My approach is to adopt some axioms and let my reactions & decisions be guided b
 
 <hr>
 ## Axioms related to values & culture
+
+**Value addition over zero sum games**. I'd always pick 1 over 2 where:
+1. Invent something of value to society and be comfortable (not rich, not poor)
+2. Play a zero sum game and be rich/famous or what have you
+
 **Incentives drive outcomes**. If you want the best people & their best work, they'll do it for the right incentives. For some, it may be the opportunity to be among other competent folks they respect, for others it may be money & so on.
 
 **Small, focused teams with wide spectrum of skill > large, unfocused teams**. Prime examples include Amundsen's lean, well-researched teams vs Scott's empire thinking in polar expeditions.
 
 **Good teams are HARD to put together and magic can happen with 5 great people in one spot.** Shockley Labs is a prime example - Shockley assembled a team from all over the US to build semiconductors. The team including Bob Noyce and Gordon Moore went on build Silicon Valley. Just like every athletic competence, unusual brainpower appears to be distributed sparsely, randomly & needs constant maintenance. So, putting together a good team is REALLY HARD. But, it is worth working and spending a lot of time towards. Ohh, when you are in a really good team, appreciate the privilege of working with them and enjoy it! It really is rare.
 
+**The world has high variance.** This has many important corollaries
+* I try to be open minded
+  * No matter how convinced I am about my argument, I realize that there's a chance I am wrong
+  * No matter how bleak a situation, there are odds for improvement
+  * No matter how rosy a situation, there are odds for deterioration
+* I try to be grateful - it can always be much worse
+* **I don't presume to know what's going on in somebody else's head.**. Life is tough for many people. Many successful humans appear to be driven by ego and they often forget the good fortune of being born in a place with enough security (food, mental, freedom etc.) to let them blossom. As much as I sometimes get annoyed by people not keeping their word, I recognize that by and large people mean well, try their hardest and yet the variance in the world - be it their health, some family situation or otherwise - humbles every one from time to time. It is particularly cruel to label or judge someone with relatively little information of their circumstance
+
+**We never have enough information to make a perfect decision.** And waiting can be good or bad - in elective medical care, waiting can be good & in business context, waiting can be bad. There's still scope for nuanced decision making even when information is scarce.
+
 **Experience requires thinking**. Just because one does the same thing for a decade doesn't mean one is an expert. It needs conscious reflection about that effort to improve & learn. The number of experts is far less than the number of people with experience.
 
-**I can never tell what's going on in somebody else's head, so I won't presume to know.**. Life is tough for many people. Many successful humans appear to be driven by ego and they often forget the good fortune of being born in a place with enough security (food, mental, freedom etc.) to let them blossom. As much as I sometimes get annoyed by people not keeping their word, I recognize that by and large people mean well, try their hardest and yet the variance in the world - be it their health, some family situation or otherwise - humbles every one from time to time. It is particularly cruel to label or judge someone with relatively little information of their circumstance.
-
 **One for you, one for the team.** The naturally curious people can get distracted quickly and lose focus. For my team, I use the mantra *one for you, one for the team*: each term, do one thing of highest importance for the team and do one other thing that makes you very excited & satisfies your curiosity. The former is important for the company and the latter is important for your well-being and being productive over the long run.
-
-**Be grateful for what you have.** It can always be MUCH worse. The world has very high variance.
 
 **I see myself as a contributor to the world's knowledge base.** I am aware of only a few unidirectional arrows: entropy one of them. The other - on a sufficiently large time scale - is human knowledge: we know how to do things better tomorrow than today. I find meaning in being a part of that pantheon of humans who've been industrious enough to discover the secrets of mother nature and generous enough to share it with the next generation.
 
 **Say no to intellectual dishonesty.** It's ok to disagree & commit or say *I don't know*. But, I'd challenge willfull intellectual dishonesty. It's never personal, though.
-
-**We never have enough information to make a perfect decision.** And waiting can be good or bad - in elective medical care, waiting can be good & in business context, waiting can be bad. There's still scope for nuanced decision making even when information is scarce.
-
 
 
 <hr>
@@ -61,7 +69,7 @@ My approach is to adopt some axioms and let my reactions & decisions be guided b
 
 **Writing poor code is unethical.** We teach our kids not to steal others' possessions. Similarly, stealing others' time is also stealing. Writing poor code steals time from developers that follow. Too often, in the name of shipping (see above), the following pattern occurs: (1) Write terrible code (2) Claim impact (3) Get promoted (4) Leave team. The developers that follow end up paying the price of cleaning up the mess. This is unethical behavior & often the person doing it does not even realize they are doing it. In their mind, there is no notion of "terrible code", only code. But, in my mind, this is both unethical behavior and a sign of poor engineering understanding. Incentives need to adjust for this behavior.
 
-**Conflict between clean code & fast shipping is NOT inevitable.** For an early stage startup, it is well-worn advice to just focus on shipping. I agree. When you don't have a business, you don't have code. But, it doesn't have to devolve into a free for all with shaky foundations that cannot be built on top of. Paying attention to writing **ageable code** - that is, code that ages better - can drastrically improve the number of features that can be built without needing to over-hire.
+**Conflict between clean code & fast shipping is NOT inevitable.** For an early stage startup, it is well-worn advice to just focus on shipping. I agree. When you don't have a business, you don't have code. But, it doesn't have to devolve into a free for all with shaky foundations that cannot be built on top of. Paying attention to writing **ageable code** - that is, code that ages better - can drastically improve the number of features that can be built without needing to over-hire.
 
 **Software ageability is a first class citizen.** Code should be written to expect change. All successful software requires change. Well-written, well-structured code ages better. Poorly structured code invites patches upon patches. Especially when each person is incentivized to push their own features, there's every reason to build upon a creaky edifice than refactor.
 

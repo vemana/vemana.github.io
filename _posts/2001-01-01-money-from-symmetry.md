@@ -9,6 +9,10 @@ featured: true
 toc:
   beginning: true
   sidebar: left
+_styles: >
+ .red-text {
+   color: red;
+ }
 ---
 
 # Introduction
@@ -178,6 +182,93 @@ Even though banks are special in terms of regulation, banking itself is not. Set
 
 <hr>
 
+## FAQ
+
+### Can we say that the Fed is the origin of money since it can print US$ without much restriction?
+No. Economies existed long before the Fed and long before banks (barter system). A barter era contract might've looked like: `I promise to receive 1 bag of rice an year from now and deliver 1/2 bag of sugar 6 months from now`.
+
+One might ask, how can someone confidently make a contract to produce rice - where does this rice come from? The rice producer is bartering with the sugar producer on the one side, but on the other side is entering a contract with mother nature. Mother nature's liability is to produce rice while the farmer's liability is to work the land in a certain way (i.e. rice farming) that she dictates.
+
+### What was bank operation like, pre Fed?
+
+Pre-Fed, to a decent approximation, Gold was the only money. Everything else was credit. The distinction was very clear and showed in bank operations.
+
+In that era, a typical bank may have had
+* Assets of 100 ozs. 10 ozs of gold  + 90 ozs worth of mortgages
+* Liabilities of 100 ozs of deposits
+* Note: Gold is measured in ozs (no US$ here)
+
+If even a small % of outstanding credit defaults, depositors can lose all their money. Suppose this bank loses 20 ozs worth of mortgages, its balance sheet becomes
+* Assets: 10 oz. of gold + 70 ozs worth of mortgages
+* Liabliities: 100 ozs of deposits
+* So, there's no way this bank can make whole on the deposits
+* <span class='red-text'>This causes a bank run</span> and frequent bank runs were a feature of the pre-Fed era
+
+If you wanted to transfer 1 oz. of Gold (i.e. money) from your account in bank A to your account in bank Z, the process would be roughly:
+* Bank A deducts 1 oz. from your account
+* Bank A physically sends 1 oz. to bank Z at the end of the day to credit to your account
+* <span class='red-text'>So, a physical transfer of Gold was necessary to move money between accounts</span>
+
+> Very important note: This system of Gold as money worked on the fundamental idea that Gold was scarce & could not be created.
+{:.block-warning}
+
+### Fed creation
+
+To a decent approximation, Fed was created as literally a big pile of Gold, a Reserve of Gold
+* To lend Gold as a last resort in a panic bank run situation
+* Once the panic subsides, the bank can pay back the Fed
+* This Gold is also known as Reserve, the same term we use for (not backed by Gold) today
+
+US$
+* The Fed issued the `US$`, also called the `Federal Reserve Note` (Note: A `Note` is just a promise) 
+* It was backed by the Gold they had in Reserve
+* 1 US$ could be presented at the Fed and redeemed for 1 oz. of Gold
+* Being paper, it was easier to carry around than Gold
+* It replaced all the other `Bank Notes`
+  * Previously, each Bank would issue their own `Note` as a form of currency
+  * So, there were many different Bank Notes in society
+  * If a bank was in trouble, no body would accept that bank note at full value
+
+Bank Gold transfers moved to a hub & spoke model.You can think of it as:
+* Each bank has an account at the Fed, called the Reserve Account
+* The Reserve Account holds Gold
+* Instead of Bank A sending physical Gold to Bank Z, the Fed deducts from Reserve Account of A and credits it to B. No physical gold needs to move
+
+### Gold standard relics
+
+Mission Creep. A typical strategy for all business goes like this:
+* Somehow gain customers
+* Become a monopoly
+* Wait until customers are used to your product, other competitors almost non-existent
+* Raise prices
+
+The same thing happened with the Federal Reserve and the US$. To a decent approximation,
+* The US$ replaced all individual Bank Notes
+* It was first promised as 1 US$ == 1 oz. of Gold but in 1933, the Govt. devalued it so that 1 US$ = 0.03 oz. of Gold (`1/35` to be precise)
+* You could still redeem US$ for Gold, but at this reduced price
+* In 1971, the tie between US$ and Gold was completely severed. You could no longer exchange US$ for Gold
+* So, the  Govt. (technically the Fed) can now print US$ as much as it wants and raise prices on citizens
+* Seems similar to the monopoly playbook?
+
+Today, transferring from Bank A to Z works similarly except 
+* The Reserve Account is no longer Gold, it is an ethereal thing called US$ (or a Fed liability)
+* Crucially, there is no more Gold and the Fed can print its replacement
+
+Many people still talk about US Govt. debt as being repaid
+* They mean it in a Gold standard sense. You loan 100 oz.s to Govt & you expect to get paid the 100 ozs
+* But, in a world with freely printable reserves, it works differently
+  * The Govt. borrows 100 US$ today and promises to pay it back next year
+  * If it can't pay, it will borrow more and repay using the boroowed funds
+  * If private citizens don't want to lend to Govt., it can (indirectly) compell the Fed to print US$ and lend. This process is called Quantitative Easing
+  * So, the US Govt. can literally pay all its debts back; the only cost is inflation
+  * You will get your 100 US$ next year, just that it won't buy as much as 100$ this year
+
+> There are some important nuances that I left out. The Fed is ostensibly an independent entity but the US President nominates the Fed Chairman of the Board of Governors. They can choose not to print US$ to lend to the Govt, but it will typically end up violating their dual mandate: Stable Employment and Stable prices. So, when the Govt. gets into trouble with debt repayment, employment gets into trouble as well and the Fed will end up cheapening the currency to turn the economy back (per their dual mandate); they cheapen it typically by reducing interest rates or by outright Quantitate Easing.
+{:.block-warning}
+
+### What is the contract between the banks and the Fed?
+There is no natural reason for the Fed and Banks to be tied together. But, they are today because of current and historical regulations. There's a lot of detail here but that's not relevant for this post.
+
 # Outro
 
 Phew, that was a lot. This section starts with a recap and concludes with some takeaways and follow-up questions.
@@ -188,7 +279,7 @@ A quick recap of the entire thought process from beginning to end
 * I started with the question `What is money?`
 * To make progress, I asked a strawman question `What happens when John Doe takes a mortgage?`
 * Even after more than an year of pondering on and off, I couldn't answer the strawman convincingly
-* Eventually, I added a constraint: any answer to this question must only use symmetric phrases - banning asymmetric phases like give, take, lend, owe, etc.
+* Eventually, I added a constraint: any answer to this question must be symmetric in John & Bank - swapping them should not change the answer
 * As it turned out, this symmetry constraint unlocked the whole mystery & within a matter of an hour, the primary concepts all became clear
 
 > ## Takeaways
