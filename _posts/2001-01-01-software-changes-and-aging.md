@@ -1,8 +1,8 @@
 ---
 layout: post
-title: All software ages. Some changes cause more aging than others.
+title: "Are there changes that accelerate software aging? Yes, here's a small list."
 date: 2023-11-13 15:00:00
-description: All software ages due to change. Certain patterns of change can age software rapidly.
+description: Without effective mitigation, some patterns of change accelerate software aging.
 tags: software-ageability
 categories: software-engineering
 featured: true
