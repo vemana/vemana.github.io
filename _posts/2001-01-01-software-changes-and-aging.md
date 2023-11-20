@@ -15,7 +15,7 @@ toc:
 
 If you've ever observed the software powering a fast growing product, you know that software ages and becomes fragile as requirements change. Can we overcome this aging or at least better manage it? 
 
-# Patterns of change that lead to aging
+# Some patterns of change that accelerate aging
 
 In this section, I'll note some patterns of change that contribute to software aging when not managed properly. These patterns occur during the normal lifecycle of software evolution, typically from changing/newer requirements. My hope is that aging can be managed effectively by virtue of these patterns being recognized & formalized.
 
@@ -76,7 +76,7 @@ The root cause is that some assumptions (like cardinality) are only ever present
 
 It is difficult to imagine self-righting architectures in response to observed cardinalities (outside of some special problem domains like auto-sharding databases) until perhaps AI starts writing all the code and change architectures (and data migrations) on the fly. Until then, in practice, explicitly enforcing the implicit assumptions is a reasonable approach. For example, when writing data to the databases, validate that `N <= 1000`. This way, if a customer wants to bump up N to 10,000, it'll fail and you can talk to the customer to learn their use case.
 
-## De-conflating evolutionary conflations
+## Evolutionary Conflations
 As we all know, distinct concepts require distinct names and distinct treatment; sometimes, the conflation can creep in very subtly through evolution.
 {:.block-tip}
 
