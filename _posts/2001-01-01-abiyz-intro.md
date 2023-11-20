@@ -9,6 +9,7 @@ featured: true
 toc:
   beginning: true
   sidebar: left
+mermaid: true
 ---
 
 # Problem Statement
@@ -33,8 +34,9 @@ Your solution likely goes like this:
 
 We can even **generalize** the solution approach.
 
-{% mermaid %}
+```mermaid
 flowchart TB
+
 A[Input] -- Transform --> B[Input]
 Y[Output] -- Transform --> Z[Output]
 subgraph psd ["Problem Solving Domain"]
@@ -44,21 +46,22 @@ subgraph rwd ["Problem Domain"]
 A -. Overall Transform .-> Z
 end
 psd ~~~ rwd
-{% endmermaid %}
+```
 
 In the `Work Desk area in English`, the Problem Solving Domain (i.e. the abstract world) is Geometry & Arithmetic.
-{% mermaid %}
+```mermaid
 flowchart TB
+
 A[Work Desk] -- Transform --> B[Height & Width in PVDS]
 Y[Area expressed in PVDS] -- Transform --> Z[Forty Two]
-subgraph psd ["Domain: Numbers, Rectangles, Arithmetic & Area algorithms"]
+subgraph psd ["Domain: Geometry & Arithmetic"]
 B -- Multiplication --> Y
 end
-subgraph rwd ["Domain: Work Desk, English words like Forty Two"]
+subgraph rwd ["Domain: Work Desk, Words like Forty Two"]
 A -. Work Desk area in English .-> Z
 end
 psd ~~~~~ rwd
-{% endmermaid %}
+```
 
 > We can **generalize a pattern of problem solving** from the thought experiment:
 > * To solve a problem, we need to utilize general tools (like geometry, arithmetic)
@@ -120,7 +123,7 @@ What transforms the Input to PSD from PD? | `parse` function
 What transforms the Output to PD from PSD? | `toWords` function
 
 <br>
-{% mermaid %}
+```mermaid
 flowchart TB
 A["`Expression String, e.g. 42*5+3`"] -- parse --> B["`**Expression Tree**, 
 e.g. +( *(42, 5), 3)`"]
@@ -132,7 +135,7 @@ subgraph pd ["Problem Domain"]
 A -. Evaluate expression & output result in English.-> Z
 end
 psd ~~~~~ pd
-{% endmermaid %}
+```
 
 
 <hr>
@@ -145,7 +148,7 @@ Once the ABIYZ questions are answered, we can model the classes & implement the 
   * `String toWords(long value)`
 
 The `ExpressionTree` class is straightforward
-```
+```java
 // An ExpressionTree is either of
 // Addition, Multiplication or just a Number.
 sealed interface ExpressionTree {
@@ -261,7 +264,7 @@ How is "solve" modeled in PSD? | `diffJsonObjects` function
 What transforms the Input to PSD from PD? | `jsonParse` function
 What transforms the Output to PD from PSD? | `TextBlock.toString()` method
 
-{% mermaid %}
+```mermaid
 flowchart TB
 A["`(Json string, Json string)`"] -- jsonParse --> B["`(JsonObject, JsonObject)`"]
 Y["`**TextBlock**`"] -- TextBlock.toString() --> Z[diff string]
@@ -272,7 +275,7 @@ subgraph pd ["Problem Domain"]
 A -. Diff two json strings & output them .-> Z
 end
 psd ~~~~~ pd
-{% endmermaid %}
+```
 
 We've just invented two concepts that we expect will make it easier to solve the problem: `JsonObject` & `TextBlock`. How do we go about defining them more clearly? We make a few observations:
 * `JsonObject` should have at least as much information as the input json strings
@@ -348,9 +351,10 @@ final class TextBlockOperations {
   // If content is larger than width, the TextBlock will keep gaining new height
   // to accommodate all of the content while never exceeding the width.
   // So, for width = 3, content = abcdefg, the returned TextBlock will look like
-  // abc
-  // def
-  // g  
+  // (excluding the enclosing | characters)
+  // |abc|
+  // |def|
+  // |g  |
   TextBlock create(String content, int width);
 }
 ```

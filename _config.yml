@@ -397,6 +397,9 @@ mdb:
 medium_zoom:
   version: "1.0.8"
   integrity: "sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8="
+mermaid:
+  version: "10.6.1"
+  integrity: "sha256-mm3Re3y7xlvh+yCD+l/Zs1d+PU0AEad93MkWvljfm/s="
 
 # -----------------------------------------------------------------------------
 # Get external JSON data

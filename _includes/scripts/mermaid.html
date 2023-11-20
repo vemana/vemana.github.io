@@ -1,0 +1,13 @@
+<script src="https://unpkg.com/mermaid@{{ site.mermaid.version }}/dist/mermaid.min.js" 
+  integrity="{{ site.mermaid.integrity }}"
+  crossorigin="anonymous"></script>
+
+<script>
+  $(document).ready(function () {
+    mermaid.initialize({
+      startOnLoad:true,
+      theme: "default",
+    });
+    window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+  });
+</script>
