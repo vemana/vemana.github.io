@@ -231,7 +231,7 @@ jsonDiff(leftJson, rightJson) returns the following diff output:
                                        b: "bcd"                                                 |
                                    }                                                            |
   !=  child                                                                                     |
-    ==  equal                      42                           |                               |
+    ==  equal                      42                                                           |
     !=  leftOnly                   "abc"                        |  <null>                       |
     !=  rightOnly                  <null>                       |  "xyz"                        |
 ```
@@ -421,7 +421,7 @@ one ~~~~~ two
 
 ## Example 4
 
-ABIYZ also helps us understand software better. For example understanding frontend frameworks like Angular ([documentation](https://angular.io/docs)) for a beginner can be difficult. But, it can help to think in ABIYZ terms.
+ABIYZ also helps us understand software better. For example, understanding frontend frameworks like Angular ([documentation](https://angular.io/docs)) for a beginner can be difficult. But, it can help to think in ABIYZ terms.
 
 Consider a website that shows a social media feed. The user sees some pixels corresponding to their social media feed. As the feed changes, the pixels change. Similarly, as the user interacts with the UI(filters/clicks etc), the feed changes. Angular aims to help manage this ping-pong. Looking at the Angular docs can be intimidating, but we can try to understand it better by asking the standard ABIYZ questions: what is the Problem Domain, the Problem Solving Domain and their corresponding concepts & operations?
 
@@ -453,7 +453,7 @@ one ~~~~~ two
 two ~~~~~ three
 ```
 
-Angular becomes easier to understand & retain once we understand the different domains (User's senses, Browser API, Angular. Angular simply models the DOM as a combination of a template with blanks filled from Application State (fancily called `data binding`). Your code to respond to the button then just needs to update the Application State and Angular is responsible for syncing it to the DOM. Of course, there is a LOT more to Angular than this, but asking ABIYZ questions provides a good start for understanding it more comprehensively.
+Angular becomes easier to understand & retain once we understand the different domains (User's senses, Browser API, Angular. Angular simply models the DOM as a template with blanks filled from Application State (fancily called `data binding`). Your code to respond to the button then just needs to update the Application State and Angular is responsible for syncing it to the DOM. Of course, there is a LOT more to Angular than this, but asking ABIYZ questions provides a good start for understanding it more comprehensively.
 
 # Summary
 
