@@ -35,7 +35,7 @@ Your solution likely goes like this:
 We can even **generalize** the solution approach.
 
 ```mermaid
-flowchart TB
+flowchart TD
 
 A[Input] -- Transform --> B[Input]
 Y[Output] -- Transform --> Z[Output]
@@ -50,7 +50,7 @@ psd ~~~ rwd
 
 In the `Work Desk area in English`, the Problem Solving Domain (i.e. the abstract world) is Geometry & Arithmetic.
 ```mermaid
-flowchart TB
+flowchart TD
 
 A[Work Desk] -- Transform --> B[Height & Width in PVDS]
 Y[Area expressed in PVDS] -- Transform --> Z[Forty Two]
@@ -68,8 +68,8 @@ psd ~~~~~ rwd
 >   * **The tools are abstract, human-invented things and only work with human-invented concepts**
 >   * For example, numbers, place value decimal systems, rectangles, multiplication are all abstract concepts/tools
 > * There's an abstraction corresponding to Input & Output within each of the two domains, Problem domain & Problem solving domain
->   * In the Problem domain, the Input is the Work Desk and the output is English words
->   * In the Problem Solving domain, Input is length & breadth of a rectangle (in PVDS) and the output is an Area (in PVDS)
+>   * In the **Problem domain**, the Input is the Work Desk and the output is English words
+>   * In the **Problem Solving domain**, Input is length & breadth of a rectangle (in PVDS) and the output is an Area (in PVDS)
 > * To solve the problem, the following steps are followed
 >   * Input from Problem Domain is converted to Input in Problem Solving Domain
 >   * The problem is solved in the Problem solving domain
@@ -89,9 +89,7 @@ I've been using ABIYZ as one of those immutable tenets and my experience has bee
 
 # Relevance for Software Engineering
 
-> The purpose of abstraction is not to be vague, but to create a new semantic level in which one can be absolutely precise. - Dijkstra
-
-Perhaps the spirit of our learnings from the Work Desk example is succinctly captured by the Dijkstra quote. It applies directly to programming. In the Work Desk example, we used a Problem Solving Domain already available for us (arithmetic, geometry) where as **in programming, we need to invent the Domain and the tools ourself**.
+In the Work Desk example, we used a Problem Solving Domain already available for us (arithmetic, geometry) where as **in programming, we need to invent the Domain and the tools ourself**.
 
 > Good software engineering requires inventing the concept of Place Value Decimal System and the Multiplication algorithm to solve the Work Desk Area problem. Numbers and arithmetic is a good problem solving domain for the area problem.
 {:.block-tip}
@@ -124,7 +122,7 @@ What transforms the Output to PD from PSD? | `toWords` function
 
 <br>
 ```mermaid
-flowchart TB
+flowchart TD
 A["`Expression String, e.g. 42*5+3`"] -- parse --> B["`**Expression Tree**, 
 e.g. +( *(42, 5), 3)`"]
 Y[long, e.g. 213] -- toWords --> Z[English words, e.g. Two Hundred and Thirteen]
@@ -265,7 +263,7 @@ What transforms the Input to PSD from PD? | `jsonParse` function
 What transforms the Output to PD from PSD? | `TextBlock.toString()` method
 
 ```mermaid
-flowchart TB
+flowchart TD
 A["`(Json string, Json string)`"] -- jsonParse --> B["`(JsonObject, JsonObject)`"]
 Y["`**TextBlock**`"] -- TextBlock.toString() --> Z[diff string]
 subgraph psd ["Problem Solving Domain"]
@@ -364,6 +362,103 @@ It is straightforward to implement all the relevant functions. In particular, `d
 
 This example demonstrates how asking simple questions in the ABIYZ pattern enables us to write clean, modular, functional code. The fact that each of these concepts has its own classes means we can test them independently. For example, whether a TextBlock is implemented correctly has nothing to do with what it is used for (like the diffing here). In other words, the ABIYZ pattern encourages defining independent concepts which can then be tested separately.
 
+## Example 3
+
+Consider a person communicating their thoughts with another person via text messaging. There's ABIYZ hidden here too:
+
+```mermaid
+flowchart TD
+
+A[Thought] -- Encode into SMS --> B[SMS message]
+Y[SMS message] -- Decode into thought --> Z[Thought]
+subgraph psd ["Problem Solving Domain"]
+B -- Send SMS --> Y
+end
+subgraph rwd ["Problem Domain"]
+A -. Communicate Thoughts .-> Z
+end
+psd ~~~~~ rwd
+```
+
+In fact, we can drill down into this example and ask: `how are SMS getting transmitted?`. We can again use ABIYZ to reason about it, recursively. SMS are transformed into a Stream of Bytes which are sent across the network. Again, we can ask, `how are those bytes transferred?` and so on so forth until we get all the way down to transistors, then atoms, then subatomic particles etc.
+
+```mermaid
+flowchart TD
+
+A[Thought] --> B[SMS message]
+B --> C[Byte Stream]
+C --> D[EM Wave]
+D -- transmit --> W
+W[EM wave] --> X
+X[Byte Stream] --> Y
+Y[SMS message] --> Z[Thought]
+
+
+subgraph four ["Electromagnetic waves"]
+D
+W
+end
+
+subgraph three ["Bytes"]
+C
+X
+end
+
+subgraph two ["SMS"]
+B
+Y
+end
+
+subgraph one ["Thoughts"]
+A
+Z
+end
+
+three ~~~~~ four
+two ~~~~~ three
+one ~~~~~ two
+```
+
+## Example 4
+
+ABIYZ also helps us understand software better. For example understanding frontend frameworks like Angular ([documentation](https://angular.io/docs)) for a beginner can be difficult. But, it can help to think in ABIYZ terms.
+
+Consider a website that shows a social media feed. The user sees some pixels corresponding to their social media feed. As the feed changes, the pixels change. Similarly, as the user interacts with the UI(filters/clicks etc), the feed changes. Angular aims to help manage this ping-pong. Looking at the Angular docs can be intimidating, but we can try to understand it better by asking the standard ABIYZ questions: what is the Problem Domain, the Problem Solving Domain and their corresponding concepts & operations?
+
+Pretty soon, we get to the ABIYZ graph for a Button Click action. That is, when a user clicks a button, we want to update the UI in response. Typically, this will include fetching new data and/or changing the screen data/layout in response to the newly fetched data.
+```mermaid
+flowchart TD
+
+A[Screen] -- Browser Sync --> B[DOM]
+B -- Angular Sync --> C[Ng Template, App State]
+C -- "Update App State (your code)" --> X
+X[Ng Template, Updated App State] -- Angular Sync --> Y
+Y[DOM] -- Browser Sync --> Z[Updated Screen]
+
+subgraph three ["Angular"]
+C
+X
+end
+
+subgraph one ["Visual, Biomechanical"]
+A -. Clicks a Button .-> Z
+end
+
+subgraph two ["Browser API"]
+B
+Y
+end
+
+one ~~~~~ two
+two ~~~~~ three
+```
+
+Angular becomes easier to understand & retain once we understand the different domains (User's senses, Browser API, Angular. Angular simply models the DOM as a combination of a template with blanks filled from Application State (fancily called `data binding`). Your code to respond to the button then just needs to update the Application State and Angular is responsible for syncing it to the DOM. Of course, there is a LOT more to Angular than this, but asking ABIYZ questions provides a good start for understanding it more comprehensively.
+
 # Summary
 
-ABIYZ pattern of problem solving is a useful thought tool that can simplify designing clean, well-factored, well-tested programs for certain classes of programs. It is likely that software engineers are doing this very particular thing, but in an intuitive way when designing programs/systems. ABIYZ formalizes it so that we can approach even difficult problems logically.
+> The purpose of abstraction is not to be vague, but to create a new semantic level in which one can be absolutely precise. - Dijkstra
+
+Perhaps the spirit of the ABIYZ pattern is succinctly captured by the Dijkstra quote. It encourages thinking in terms of different domains. Each domain has its own set of concepts and tools. **We solve problems of one domain by modeling them as problems in another domain** where they are more readily solvable. For a SWE, the challenge is to identify and create these domains in service of the problem at hand. The `diffJsonObjects` example demonstrated this thought process.
+
+To conclude, ABIYZ pattern of problem solving is a useful thought tool that can simplify designing clean, well-factored, well-tested programs for certain classes of programs. It is likely that software engineers are doing this very particular thing, but in an intuitive way when designing programs/systems. ABIYZ formalizes it so that we can approach even difficult problems logically.

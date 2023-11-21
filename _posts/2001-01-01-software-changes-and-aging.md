@@ -19,7 +19,7 @@ If you've ever observed the software powering a fast growing product, you know t
 
 In this section, I'll note some patterns of change that contribute to software aging when not managed properly. These patterns occur during the normal lifecycle of software evolution, typically from changing/newer requirements. My hope is that aging can be managed effectively by virtue of these patterns being recognized & formalized.
 
-## Going from Product Type to Sum Type (going from 1 to 2)
+## 1. Going from Product Type to Sum Type
 
 > When SWEs start off a model (quite reasonably) as a Product Type, changing it to a Sum Type can be a significant effort that is often hacked around.
 {:.block-tip}
@@ -57,7 +57,7 @@ When confronted with this problem, time/resource constraints often prefer a **ha
 
 There are no great solutions for this problem today. But, one can imagine end-to-end software development environments (i.e. Programming languages, databases & all parts of the stack) having tooling to make moving from Product Types to Sum Types easy. One thing's for sure: with even a small number of such hacks, the codebase is a hot mess.
 
-## Exceeding a dimension's implicit cardinality
+## 2. Exceeding a dimension's implicit cardinality
 > When SWEs model data that 1. Contains sets/lists 2. Is customer-specified, there's often an implicit expectation of the cardinality on those sets/lists. Software ages when these implicit expectations change because customers outgrow the requirements.
 {:.block-tip}
 
@@ -76,7 +76,7 @@ The root cause is that some assumptions (like cardinality) are only ever present
 
 It is difficult to imagine self-righting architectures in response to observed cardinalities (outside of some special problem domains like auto-sharding databases) until perhaps AI starts writing all the code and change architectures (and data migrations) on the fly. Until then, in practice, explicitly enforcing the implicit assumptions is a reasonable approach. For example, when writing data to the databases, validate that `N <= 1000`. This way, if a customer wants to bump up N to 10,000, it'll fail and you can talk to the customer to learn their use case.
 
-## Evolutionary Conflations
+## 3. Evolutionary Conflations
 As we all know, distinct concepts require distinct names and distinct treatment; sometimes, the conflation can creep in very subtly through evolution.
 {:.block-tip}
 
