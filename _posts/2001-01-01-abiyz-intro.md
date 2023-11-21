@@ -453,7 +453,7 @@ one ~~~~~ two
 two ~~~~~ three
 ```
 
-Angular becomes easier to understand & retain once we understand the different domains (User's senses, Browser API, Angular. Angular simply models the DOM as a template with blanks filled from Application State (fancily called `data binding`). Your code to respond to the button then just needs to update the Application State and Angular is responsible for syncing it to the DOM. Of course, there is a LOT more to Angular than this, but asking ABIYZ questions provides a good start for understanding it more comprehensively.
+Angular becomes easier to understand & retain once we understand the different domains (User's senses, Browser, Angular). Angular simply models the DOM as a template with blanks filled from Application State (fancily called `data binding`). Your code to respond to the button then just needs to update the Application State and Angular is responsible for syncing it to the DOM. Of course, there is a LOT more to Angular than this, but asking ABIYZ questions provides a good start for understanding it more comprehensively.
 
 # Summary
 
