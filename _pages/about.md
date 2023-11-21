@@ -21,7 +21,9 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Welcome to Vemana's Space. I am Subrahmanyam, a Staff Software Engineer at Google. This is where I write about anything that catches my fancy. That may or may not include Software Engineering, Math, Life & Laughter. All opinions are my own and offered without guarantee.
+Welcome to Vemana's Space. I am Subrahmanyam, a Staff Software Engineer at Google. This is where I write about anything that catches my fancy. Usual suspects are Software Engineering, Math, Life & Laughter. I am particularly interested in reducing human intensity of software development by 100x.
+
+All opinions are my own and offered without guarantee.
 
 ## What's **Vemana**? 
 <a href="https://en.wikipedia.org/wiki/Vemana">Vemana</a> is a Telugu poet particularly known for short, rythmic, life-lesson poems. His most famous work is **Vemana Sathakam** comprising 100 poems each of which is 3 short lines long completed by a final 4th signature line.

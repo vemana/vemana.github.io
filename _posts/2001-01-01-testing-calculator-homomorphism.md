@@ -149,11 +149,11 @@ There are many benefits to exploiting homomorphism.
 
   static long evaluate(Expression node, VariableMap varMap) {
     try(var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-        return evaluate(node, varMap);
+        return evaluate(node, varMap, scope);
     }
   }
 
-  static long evaluate(Expression node, VariableMap varMap, StructuredTaskScope scope) {
+  private static long evaluate(Expression node, VariableMap varMap, StructuredTaskScope scope) {
     var childResults = children(node)
                            .map(child -> scope.fork(() -> evaluate(child, varMap)))
                            .toList();
