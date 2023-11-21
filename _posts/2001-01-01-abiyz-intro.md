@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "How to think about programs & programming? Inspiration from age old tools like arithmetic."
+title: "How to think about programs & programming? ABIYZ: inspired by age old tools like arithmetic."
 date: 2023-11-19 15:00:00
-description: 
+description: "A deep introspection of how we use arithmetic reveals a powerful pattern for programming."
 tags: software-abiyz
 categories: software-engineering
 featured: true
@@ -73,7 +73,7 @@ psd ~~~~~ rwd
 > * To solve the problem, the following steps are followed
 >   * Input from Problem Domain is converted to Input in Problem Solving Domain
 >   * The problem is solved in the Problem solving domain
->     * The Work Desk Area problem is solved by taking the inputs (i.e. length & breadth) and converting it into the output (i.e. the rectangle's area)
+>     * The `Work Desk Area` problem is solved by multiplying the length & breadth
 >   * Output from Problem Solving Domain is converted to Output in Problem Domain
 {:.block-tip}
 
