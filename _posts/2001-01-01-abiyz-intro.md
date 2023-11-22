@@ -6,6 +6,7 @@ description: "A deep introspection of how we use arithmetic reveals a powerful p
 tags: software-abiyz
 categories: software-engineering
 featured: true
+giscus_comments: true
 toc:
   beginning: true
   sidebar: left

@@ -6,6 +6,7 @@ description: Without effective mitigation, some patterns of change accelerate so
 tags: software-ageability
 categories: software-engineering
 featured: true
+giscus_comments: true
 toc:
   beginning: true
   sidebar: left
@@ -44,7 +45,7 @@ Suppose you are the software owner and your product is managing 401K plans (like
 Now, you need to support a SDB (Self Directed Brokerage) for a 4th `Fund`; that is, an option for an Account holder to put money into self-managed external brokerage account. It's no longer true that each `Fund` has a notion of `Today's price` because SDB doesn't have a price! You now have a different model: `Fund := FundWithPrice | SDB`. That is, `Fund` has evolved into a Sum Type from a Product Type.
 
 ### Why this Change is difficult to manage {#ptos-difficulty}
-Going from Sum Type to Product Type often require a ton of effort. Using example#2, here are some things that need to change in response:
+Going from Product Type to Sum Type often requires a ton of effort. Using example#2, here are some things that need to change in response:
 * Database: Suppose you are using a relational db and have a table for the supported `Fund`s. Data specific to the SDB cannot fit in this table because the properties of a `FundWithPrice` are different from `SDB`; you need to invest time in a solution.
 * Application: Your API method `retrieveAccountHoldings` that returns a `list of (fund_id, quantity, today's price)` now has to change to support returning SDB data and the impl has to change to support it. If you have an external API, exposing and versioning this change can be challenging (without good tooling)
 * UI: Your UI was previously displaying Account Holdings in a table with three columns: (Fund, Quantity, Price). You now have to rethink that design in the presence of an SDB.
