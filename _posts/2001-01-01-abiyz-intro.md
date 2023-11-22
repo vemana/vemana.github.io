@@ -456,6 +456,66 @@ two ~~~~~ three
 
 Angular becomes easier to understand & retain once we understand the different domains (User's senses, Browser, Angular). Angular simply models the DOM as a template with blanks filled from Application State (fancily called `data binding`). Your code to respond to the button then just needs to update the Application State and Angular is responsible for syncing it to the DOM. Of course, there is a LOT more to Angular than this, but asking ABIYZ questions provides a good start for understanding it more comprehensively.
 
+## Example 5
+
+The [Truth framework](https://truth.dev/) is a `Fluent assertions for Java`. It allows you to assert in tests, like:
+
+```java
+@Test
+public void test_restaurantQuery() {
+    // retrieve a restaurant by query
+    Restaurant restaurant = queryRestaurants("where menuItem contains 'Pizza'").firstResult();
+
+    // test that the query actually worked
+    assertThat(restaurant).containsMenuItem(Pizza);
+}
+```
+
+At first glance, `assertThat(restaurant).containsMenuItem(Pizza)` looks somewhat magical. But, ABIYZ again helps us understand.
+
+
+```mermaid
+flowchart TD
+
+A[Restaurant object] -- toSubject() --> B[RestaurantSubject object]
+
+B -- containsMenuItem(Pizza) --> Y[Boolean
+represents whether
+requirement is met.
+]
+
+Y -- assertTrue() --> Z[Requirement asserted.]
+
+subgraph one ["Domain: Regular Objects"]
+A -. Assert requirement that
+menu contains Pizza .-> Z
+end
+
+subgraph two ["Domain: Truth Subjects"]
+B
+Y
+end
+
+one ~~~~~ two
+```
+
+Essentially, `<X>Subject` is a new domain which readily verifies custom conditions on `<X>`. Here, `<X>` is `Restaurant`. For example, if `<X> = List`, `ListSubject` will have methods that are relevant for verifying the state of the list (but not present in the `List` class itself), such as `hasElementsExactlyInOrder(elements)`, so you can write `myListSubject.hasElementsExactlyInOrder(1,2,3)`. The `ListSubject` is reusable across every test class and can provide a ton of methods for typical condition verification.
+
+Using the standard ABIYZ pattern, similar to Example #1's `toWords(evaluateTree(parse(expression))`, we can now write `assertTrue(containsMenuItem(toSubject(restaurant), Pizza))`. From there, it is a refinement of the API to make it fluent & more user-friendly.
+
+Different refinements of the assertion API | Comment
+--- | ---
+`assertTrue(containsMenuItem(toSubject(restaurant), Pizza))` | standard ABIYZ format
+`assertTrue(toSubject(restaurant).containsMenuItem(Pizza))` | `containsMenuItem` became a method on the Truth subject.<br>This method is very natural for verifying a `Restaurant`'s properties, but it should not be present on the `Restaurant` class itself because it is not a top-level property.
+`assertThat(restaurant).containsMenuItem(Pizza)` | A more fluent version of the same content
+
+<br>
+In the actual Truth subject design, `<X>Subject` encapsulates not just the object being verified, but also the Failure strategy (quick exit vs report lazily). Hence `assertThat(restaurant)` is really a shortcut for `new RestaurantSubject(restaurant, failureStrategy = ASSERT)`. In addition, each method can customize the error message; for example the error message for `containsMenuItem(Pizza)` should be different from that of `hasFoodInspectionGrade(A)`. In short, the `Truth Subject` domain has the tools & concepts required for verifying conditions on objects in tests.
+
+Setting aside the details, this is another example where ABIYZ helps us understand a framework.
+
+<hr>
+
 # Summary
 
 > The purpose of abstraction is not to be vague, but to create a new semantic level in which one can be absolutely precise. - Dijkstra
