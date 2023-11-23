@@ -479,9 +479,9 @@ flowchart TD
 
 A[Restaurant object] -- toSubject() --> B[RestaurantSubject object]
 
-B -- containsMenuItem(Pizza) --> Y[Boolean
-represents whether
-requirement is met.
+B -- containsMenuItem(Pizza) --> Y["Boolean (is requirement met?)
+&
+Failure message (if requirement not met)"
 ]
 
 Y -- assertTrue() --> Z[Requirement asserted.]
