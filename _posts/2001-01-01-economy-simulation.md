@@ -5,7 +5,7 @@ date: 2023-10-20 15:00:00
 description: Simulation using learnings from the 'What is Money?' post.
 tags: simulation
 categories: finance
-featured: true
+featured: false
 giscus_comments: true
 published: false
 toc:

@@ -5,7 +5,7 @@ date: 2023-11-22 15:00:00
 description: 
 tags: software-testing
 categories: software-engineering
-featured: true
+featured: false
 published: false
 giscus_comments: true
 toc:
@@ -33,6 +33,26 @@ There's also a fourth condition. It can help catch more bad tests but at the exp
   * If you must scroll, how many times you need to do so should be minimized
   * This is obviously not objective, but the key is the word *understand* and we shouldn't let perfect be the enemy of the good
 
+## Pedagogical Example
+
+We want an example that has
+1. State changes
+1. Irrelevant details for certain properties
+
+
+We'll use the following example to demonstrate tests.
+
+Concepts
+* Proposal: Upon creation, it is in DRAFT state
+  * Edit Proposal: You can edit a proposal and thereby create a new Draft proposal
+  * Approve Draft Proposal: When a draft is Approved, it moves to Approved state and replaces the currently Approved Proposal (if any)
+* Publish
+
 ## Arrange/Assert/Act
 
-asdf
+## No Underspecification
+
+## No Overspecification
+
+## No scrolling out of the test body
+

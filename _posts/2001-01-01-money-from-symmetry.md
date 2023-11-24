@@ -5,7 +5,7 @@ date: 2023-10-19 15:00:00
 description: Demanding a symmetric explanation offers insight.
 tags: symmetry
 categories: finance
-featured: true
+featured: false
 giscus_comments: true
 toc:
   beginning: true

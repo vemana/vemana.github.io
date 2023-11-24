@@ -5,7 +5,7 @@ date: 2023-11-13 15:00:00
 description: Without effective mitigation, some patterns of change accelerate software aging.
 tags: software-ageability
 categories: software-engineering
-featured: true
+featured: false
 giscus_comments: true
 toc:
   beginning: true

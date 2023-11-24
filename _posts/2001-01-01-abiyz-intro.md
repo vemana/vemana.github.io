@@ -5,7 +5,7 @@ date: 2023-11-19 15:00:00
 description: "A deep introspection of how we use arithmetic reveals a powerful pattern for programming."
 tags: software-abiyz
 categories: software-engineering
-featured: true
+featured: false
 giscus_comments: true
 toc:
   beginning: true
@@ -40,13 +40,16 @@ flowchart TD
 
 A[Input] -- Transform --> B[Input]
 Y[Output] -- Transform --> Z[Output]
+
 subgraph psd ["Problem Solving Domain"]
 B -- Solve --> Y
 end
+
 subgraph rwd ["Problem Domain"]
 A -. Overall Transform .-> Z
 end
-psd ~~~ rwd
+
+psd ~~~~~ rwd
 ```
 
 In the `Work Desk area in English`, the Problem Solving Domain (i.e. the abstract world) is Geometry & Arithmetic.
@@ -55,12 +58,15 @@ flowchart TD
 
 A[Work Desk] -- Transform --> B[Height & Width in PVDS]
 Y[Area expressed in PVDS] -- Transform --> Z[Forty Two]
+
 subgraph psd ["Domain: Geometry & Arithmetic"]
 B -- Multiplication --> Y
 end
+
 subgraph rwd ["Domain: Work Desk, Words like Forty Two"]
 A -. Work Desk area in English .-> Z
 end
+
 psd ~~~~~ rwd
 ```
 
@@ -121,7 +127,6 @@ How is "Solve" modeled in PSD? | `evaluateTree` function
 What transforms the Input to PSD from PD? | `parse` function
 What transforms the Output to PD from PSD? | `toWords` function
 
-<br>
 ```mermaid
 flowchart TD
 A["`Expression String, e.g. 42*5+3`"] -- parse --> B["`**Expression Tree**, 
@@ -427,6 +432,7 @@ ABIYZ also helps us understand software better. For example, understanding front
 Consider a website that shows a social media feed. The user sees some pixels corresponding to their social media feed. As the feed changes, the pixels change. Similarly, as the user interacts with the UI(filters/clicks etc), the feed changes. Angular aims to help manage this ping-pong. Looking at the Angular docs can be intimidating, but we can try to understand it better by asking the standard ABIYZ questions: what is the Problem Domain, the Problem Solving Domain and their corresponding concepts & operations?
 
 Pretty soon, we get to the ABIYZ graph for a Button Click action. That is, when a user clicks a button, we want to update the UI in response. Typically, this will include fetching new data and/or changing the screen data/layout in response to the newly fetched data.
+
 ```mermaid
 flowchart TD
 
