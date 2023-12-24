@@ -6,7 +6,7 @@ description: How many tests to write? What tests to write? Can there be objectiv
 tags: software-testing
 categories: software-engineering
 featured: false
-giscus_comments: true
+giscus_comments: false
 toc:
   beginning: true
   sidebar: left

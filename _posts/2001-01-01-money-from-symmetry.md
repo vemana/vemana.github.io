@@ -6,7 +6,7 @@ description: Demanding a symmetric explanation offers insight.
 tags: symmetry
 categories: finance
 featured: false
-giscus_comments: true
+giscus_comments: false
 toc:
   beginning: true
   sidebar: left

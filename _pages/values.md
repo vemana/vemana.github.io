@@ -61,6 +61,7 @@ My approach is to adopt some axioms and let my reactions & decisions be guided b
 
 **Say no to intellectual dishonesty.** It's ok to disagree & commit or say *I don't know*. But, I'd challenge willfull intellectual dishonesty. It's never personal, though.
 
+**SOMETIMES, don't let perfect be the enemy of the good.** With complex systems, often perfection is not possible and good enough is good enough! However, when it comes to basics, aiming for perfection is reasonable. Perfection in the basics is required to approach previously impossible tasks.
 
 <hr>
 ## Axioms related to Software Engineering
@@ -69,19 +70,19 @@ My approach is to adopt some axioms and let my reactions & decisions be guided b
 
 **Writing poor code is unethical.** We teach our kids not to steal others' possessions. Similarly, stealing others' time is also stealing. Writing poor code steals time from developers that follow. Too often, in the name of shipping (see above), the following pattern occurs: (1) Write terrible code (2) Claim impact (3) Get promoted (4) Leave team. The developers that follow end up paying the price of cleaning up the mess. This is unethical behavior & often the person doing it does not even realize they are doing it. In their mind, there is no notion of "terrible code", only code. But, in my mind, this is both unethical behavior and a sign of poor engineering understanding. Incentives need to adjust for this behavior.
 
-**Conflict between clean code & fast shipping is NOT inevitable.** For an early stage startup, it is well-worn advice to just focus on shipping. I agree. When you don't have a business, you don't have code. But, it doesn't have to devolve into a free for all with shaky foundations that cannot be built on top of. Paying attention to writing **ageable code** - that is, code that ages better - can drastically improve the number of features that can be built without needing to over-hire.
+**Conflict between maintainable code & fast shipping is NOT inevitable.** For an early stage startup, it is well-worn advice to just focus on shipping. I agree. When you don't have a business, you don't have code. But, it doesn't have to devolve into a free for all with shaky foundations that cannot be built on top of. Paying attention to writing **ageable code** - that is, code that ages better - can drastically improve the number of features that can be built without needing to over-hire.
 
 **Software ageability is a first class citizen.** Code should be written to expect change. All successful software requires change. Well-written, well-structured code ages better. Poorly structured code invites patches upon patches. Especially when each person is incentivized to push their own features, there's every reason to build upon a creaky edifice than refactor.
 
 **Clean structure & correctness go hand in hand.** Cleanest code tends also to be the fastest to produce and has much better lifetime costs owing to fewer bugs.
 
-**Distinguish between egregious and acceptable shortcuts.** It is inevitable to need to take shortcuts.
+**Distinguish between egregious and acceptable shortcuts.** It is inevitable to need to take shortcuts. Egregious ones - those that explode lifetime costs - should be reserved for extraordinary circumstances.
 
 **Thoughtful testing has an EXTREMELY high ROI.** Without a test suite that gives confidence on no-op refactors, code ages very quickly.
 
-**Culture comes from the top.** If your most respected engineer takes short cuts, expect 10x of it from everyone else. So, actions from a position of responsibility matter a lot.
+**Culture comes from the top.** If your most respected engineer takes short cuts, expect 10x of it from everyone else. So, actions from a position of responsibility matter disproportionately.
 
-**Basics are a must.** This includes algorithms, hardware performance like caches etc.
+**Basics are a must.** On a long enough timescale, a well-rounded engineer will need to master all the basics and more. This includes a thorough knowledge of standard and domain specific algorithms, understanding hardware details like CPU caches, understand concurrency, be able to reason about distributed systems among others.
 
 **Telemetry is a first class citizen.** What gets measured gets improved. So, no telemetry => no improvements in latency or understanding of user behavior etc.
 

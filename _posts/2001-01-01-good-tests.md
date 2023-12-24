@@ -7,7 +7,7 @@ tags: software-testing
 categories: software-engineering
 featured: false
 published: false
-giscus_comments: true
+giscus_comments: false
 toc:
   beginning: true
   sidebar: left

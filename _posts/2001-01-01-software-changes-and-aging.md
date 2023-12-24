@@ -6,7 +6,7 @@ description: Without effective mitigation, some patterns of change accelerate so
 tags: software-ageability
 categories: software-engineering
 featured: false
-giscus_comments: true
+giscus_comments: false
 toc:
   beginning: true
   sidebar: left

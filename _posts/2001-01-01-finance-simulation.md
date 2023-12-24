@@ -6,7 +6,7 @@ description: Simulation using learnings from the 'What is Money?' post.
 tags: simulation
 categories: finance
 featured: true
-giscus_comments: true
+giscus_comments: false
 published: false
 toc:
   beginning: true
