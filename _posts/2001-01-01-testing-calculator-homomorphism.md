@@ -10,10 +10,7 @@ giscus_comments: false
 toc:
   beginning: true
   sidebar: left
-_styles: >
- .red-text {
-   color: red;
- }
+
 ---
 
 # 5 minute summary

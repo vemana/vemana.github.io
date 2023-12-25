@@ -36,3 +36,9 @@
     <script src="{{ '/assets/js/theme.js' | relative_url | bust_file_cache }}"></script>
     <script src="{{ '/assets/js/dark_mode.js' | relative_url | bust_file_cache }}"></script>
     {% endif %}
+
+    {% for extra_css in page.extra_css -%}
+    {%- assign css_file = '/assets/css/' | append: extra_css | append: '.css' -%}
+      <!-- Page/Post style -->
+      <link rel="stylesheet" href="{{ css_file | relative_url | bust_file_cache }}">
+    {% endfor %}
