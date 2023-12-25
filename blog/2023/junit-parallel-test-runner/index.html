@@ -4,14 +4,24 @@
 <span class="nd">@RunWith</span><span class="o">(</span><span class="nc">ParallelTestMethodsRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyDbTest</span> <span class="o">{</span>
 
-  <span class="c1">// Spins up the database; shared by each test case</span>
+  <span class="c1">// Runs once per test class, ahead of any test case.</span>
+  <span class="c1">// Spins up the database.</span>
+  <span class="c1">// `dbTestCase` field is shared and used by all the test cases.</span>
   <span class="nd">@ClassRule</span>
   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">DbTestCase</span> <span class="n">dbTestCase</span> <span class="o">=</span> <span class="nc">DbTestCase</span><span class="o">.</span><span class="na">postgres_15_3</span><span class="o">();</span>
 
-  <span class="nd">@Test</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test_1</span><span class="o">()</span> <span class="o">{}</span>
-  <span class="nd">@Test</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test_2</span><span class="o">()</span> <span class="o">{}</span>
+  <span class="c1">// Runs once per test case.</span>
+  <span class="c1">// Different tests use different 'database' (as in `USE DATABASE D;` of MySql)</span>
+  <span class="c1">// to avoid mutual interference.</span>
+  <span class="c1">// Creates a new 'database' and creates tables in them, ready for the test</span>
+  <span class="c1">// to use.</span>
+  <span class="nd">@Rule</span>
+  <span class="kd">public</span> <span class="nc">SchemaApplier</span> <span class="n">schemaApplier</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SchemaApplier</span><span class="o">(</span><span class="n">dbTestCase</span><span class="o">);</span>
+
+  <span class="nd">@Test</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test_1</span><span class="o">()</span> <span class="o">{...}</span>
+  <span class="nd">@Test</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test_2</span><span class="o">()</span> <span class="o">{...}</span>
   <span class="c1">// ...</span>
-  <span class="nd">@Test</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test_20</span><span class="o">()</span> <span class="o">{}</span>
+  <span class="nd">@Test</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test_20</span><span class="o">()</span> <span class="o">{...}</span>
 <span class="o">}</span>
 </code></pre></div></div> <hr> <p>Note the following:</p> <ul> <li>A new Runner, <code class="language-plaintext highlighter-rouge">ParallelTestMethodsRunner</code> </li> <li>The test configuration <code class="language-plaintext highlighter-rouge">ParallelTestMethodsConfig</code> which supports two options <ul> <li>Run using Platform Threads (for CPU bound tests)</li> <li>Run using Virtual Threads (for IO bound tests)</li> </ul> </li> </ul> <hr> <p>The Runner is fairly trivial to implement based on JUnit’s <code class="language-plaintext highlighter-rouge">Parallel Computer</code>.</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
  * Runs test methods in parallel; they all share the same static setup.
