@@ -1,13 +1,13 @@
 ---
 layout: post
-title: The web-scale Software Engineer Skillset
+title: The Web-scale Software Engineer Skillset
 date: 2023-11-19 15:00:00
-description: "A look into the skills that Web Scale Engineers encounter."
+description: "Many skillsets required. Some only learnable from practice."
 tags: software-abiyz
 categories: software-engineering
 featured: false
 giscus_comments: false
-published: false
+published: true
 toc:
   beginning: true
   sidebar: left
@@ -16,17 +16,35 @@ extra_css: blogposts
 
 ---
 
+{:.block-danger}
+> This is a very early draft, incomplete and Work-in-progress. Read at your own risk!
+
 # What is this about?
 
-Colloquially, a **WSE** (Web-scale Software Engineer) is a SWE (Software Engineer) with the skills to work end to end on a large-scale web application. But what topics does an WSE need to master or at least be familiar with? In this post, I'll touch upon topics of interest for WSE aspirants, provide a brief introduction and some jump-off points for further research.
+Colloquially, a **WSE** (Web-scale Software Engineer) is a SWE (Software Engineer) with the skills to work end to end on a large-scale web application. But what topics skills does a WSE need to master or at least be familiar with? In this post, I'll outline various skills that a WSE may call upon.
 
-## A note of caution
+## Goal
 
-This post covers a large set of topics. If you are planning to be an WSE, don't let it intimidate you. Some things to bear in mind:
-* The goal for an WSE first and foremost is to solve customer problems. You may not even need 10% of these skills in some jobs and may need 90% in some others
-* Likely, you'll learn best by actually doing. So, it is helpful if you are practising some of these in your day job. Either way, you must *do* to learn
+If you are a early-career WSE, this post is meant for you. My goal is to accelerate your journey towards becoming a strong WSE. When I say `you` in this post, it refers to you, the early-career WSE.
+
+ For everyone else including expert WSEs or SWEs from other walks, I hope there's still something of interest for you.
+
+## Format
+
+For each topic, I'll provide a brief introduction, note some challenges, share my personal observations in dealing with the topic, maybe add some commentary and list some jump-off points for further research.
+
+
+## !! Caution !!
+
+This post covers a large set of topics, but don't let it intimidate you. Some things to bear in mind:
+* The goal for a WSE first and foremost is to solve customer problems. You may need < 10% of these skills or > 90% depending on the actual scenario
+* Likely, you'll learn best by actually doing. So, it is helpful if you are practising some of these in your day job
 * Learning these topics takes significant, conscious effort. Expertise is only obtained by thinking
-* Have realistic expectations: If you have a day job & family responsibilities, mastering a reasonable portion of these topics can easily take more than a decade. If you are a student, you can expect to master quicker by standing up real applications using the cloud.
+* Have realistic expectations: If you have a day job & family responsibilities, mastering a reasonable portion of these topics can easily take more than a decade
+
+## Caveats
+
+I've taken reasonable precautions to only say/link-to thoughts/resources that I genuinely believe in. However, this post represents my experience **and my biases**. As such, you'll likely find something to disagree with or even something you strongly agree with. I welcome engaging me in (civil) discussion. See [about](/) for how to reach me.
 
 # Code
 
@@ -35,21 +53,24 @@ As a WSE
 * you'll deal with many frameworks which can look convoluted and/or daunting; it helps to have a framework to think/reason about them to quickly come upto speed
 * you'll firefight in production, introduce bugs, fix bugs unrelated to your work, write tests and so on
 
-To be a master WSE usually requires expertise in the above topics. Each SWE will develop their own method over time.
+In this section, I'll introduce these aspects and some of the challenges you'll face. To be a master WSE requires expertise in the above topics. Each SWE will develop their own method over time.
 
 ## Structure
 
 {:.block-warning}
 > Structure your code coherently.
 
-It should be possible to 
+Once your codebase reaches a certain size in terms of files, lines & people working on it, it becomes unweildy to analyze, understand, improve and thus product velocity slows down. Maintaining a healthy codebase is an extremely important WSE skill. But, *what is a healthy codebase*? Software Engg has many undefined terms such as *healthy codebase*. To my knowledge, there is no universally accepted definition or even well known candidate definitions. So, everyone reaches their own conclusions over time. However, anecdotally there appears to be a shared kernel across many peole's intuitive definitions that I share below.
+
+Aim for the following standard wrt your code
 * Given knowledge of what the code does, unfamiliar SWEs should be able to understand HOW it does it
 * Given NO apriori knowledge of what the code does, SWEs should have at least say 50% chance of understanding WHAT the code is doing
-* Even unfamiliar SWEs should be able to guess what feature is implemented where in the codebase
+* Unfamiliar SWEs should be able to guess what feature is implemented where in the codebase
 * Code should age well. That is, as more features are built it shouldn't be necessary to do stop-the-world codebase refactors
 
-This is a pretty high bar and only a small proportion of SWEs will ever reach it. So, a smaller, intermediate milestone is:
-* If you revisit say, a 30K+ line codebase you authored after being away for an year, you should be able to understand every bit of it
+This is a pretty high bar and only a small proportion of SWEs will ever reach it. An intermediate milestone is: If you revisit say, a 30K+ line codebase you authored after being away for an year, you should be able to understand every bit of it.
+
+Even the intermediate milestone is a pretty high bar and will require repeatable, simple, explainable code structure and patterns.
 
 <div markdown="1" class="boxyList">
 Resources
@@ -57,14 +78,14 @@ Resources
 Definitive resources are hard to find because this is an often overlooked topic. In my practice,
 * I use the [ABIYZ pattern](/blog/2023/abiyz-intro) for structuring code where possible
 * Experience taught me some particularly [bad patterns of code aging](/blog/2023/software-changes-and-aging/)
-* Unless working on a strongly latency sensitive concern, I use immutability/functional style code
-* If you use [Bazel](https://bazel.build) as the build tool, `package_groups` and `visibilty` offer additional options for maintaining a sane code structure
+* If you use [Bazel](https://bazel.build) as the build tool, `package_groups` and `visibilty` offer additional options for maintaining a more semantic code structure
+* Unless working on a strongly latency sensitive concern, I use [TODO: immutability/functional style code](TODO)
 </div>
 
 ## Frameworks
 
 {:.block-warning}
->Understand the frameworks you use thoroughly.
+>Understand frameworks thoroughly.
 
 A modern web scale application likely uses several frameworks. Examples include backend frameworks (REST APIs, Authentication etc.), frontend frameworks (Angular, React etc.). Each of those frameworks tends to do a few things very well (its **design center**) and other things not so well. Ideally, you should stick to its design-center, understand it thoroughly and be able to explain it to others.
 
@@ -77,6 +98,13 @@ I am reluctant to list many frameworks because learning specific ones is not the
 
 In my practice, I find the [ABIYZ pattern for understanding frameworks](/blog/2023/abiyz-intro#example-4) useful. Beyond that, I find it helpful to be aware of a large number of ideas from various walks of Computer Science and Engineering - very few ideas are brand new and every new fangled framework has several overlapping ideas from bygone eras.
 </div>
+
+## Programming Language
+
+{:.block-warning}
+> Become an expert at at least one language and stay up-to-date.
+
+Language expertise pays for itself through better code, lesser bugs and overall more fun.
 
 ## Building
 
@@ -112,9 +140,8 @@ Nevertheless, you will have to write practically good tests (i.e. ones with a hi
 Resources
 
 To my knowledge, there aren't any definitive resources on an objective definition of a *Good Test*. Nevertheless, there are some important ideas:
-* [Arrange-Assert-Act](https://learn.microsoft.com/en-us/visualstudio/test/unit-test-basics?view=vs-2022#write-your-tests) assists in test hygiene
-* [Modern best practices for Java Tests](https://phauer.com/2019/modern-best-practices-testing-java/) is a must read
-* [Property based testing](https://increment.com/testing/in-praise-of-property-based-testing/) focuses on the actual contract with minimal distractions
+* [Modern best practices for Java Tests](https://phauer.com/2019/modern-best-practices-testing-java/) has excellent advice on practical testing
+* [Property based testing](https://increment.com/testing/in-praise-of-property-based-testing/) is a set of ideas that focuses on the actual contract with minimal distractions
 
 In my practice,
 * I adopt the definition of *Good Test* from [TODO: Objectively Good Tests](TODO) and utilize the practical techniques there-in
@@ -134,29 +161,47 @@ Resources
 
 This is yet another of relative controversy with no clear consensus. In a way, Error Handling is also in a similar boat to Testing in that there is no accepted objective definition of *Good Error Handling*. Still there are some important thoughts that can help the practical burden.
 * Midori's [The Error Model](https://joeduffyblog.com/2016/02/07/the-error-model/) is perhaps a one-stop read into the history of error handling in programming languages and the relative pros/cons of the various approaches
-* In my practice, I aim for [TODO: practical error handling in Java](TODO) practices.
 * [Error handling Hygiene](https://stackify.com/best-practices-exceptions-java/) has some standard best practices focused on Java, but it does not define what *Good Error Handling* is
+* In my practice, I aim for [TODO: practical error handling in Java](TODO) practices.
 </div>
 
-## Immutability/Functional style
+## Style: Functional vs Imperative
 
-Use a functional style of coding unless you have strong reasons not to (extreme performance requirements).
+{:.block-warning}
+>Use a functional style of coding unless you have strong reasons not to (for example, extreme performance requirements).
 
-Software engineering appears to be moving in the direction of preferring functional coding style characterized by most objects being immutable (among other things). The design of several successful libraries (Java Streams, Google Guava) reflect this preference and several languages are evolving in this direction (Rust and Java with pattern matching for example). At first, for SWEs used to imperative programming, this style may be a bit unusual, but if my experience is any guide, functinal code tends to be *much* less buggy and composes far better. There is additional expense in the form of upfront time to write the code, but amortized over a lifetime (in reduced maintenance/readability costs for e.g.), the benefits appear strongly skewed towards immutability.
+At first, for SWEs used to imperative programming, this style may be a bit unusual, but if my experience is any guide, functional code tends to be *much* less buggy and composes far better. There is additional expense in the form of upfront time to write the code, but amortized over a lifetime (in reduced maintenance/readability costs for e.g.), the benefits appear strongly skewed towards immutability.
 
-Note that I am not recommending slavishly adhering to functional style, merely that functional is a better default choice than imperative.
+It could be confirmation bias on my end, but Software engineering appears to be moving in the direction of preferring functional coding style characterized by most objects being immutable (among other things) and first class functions (lambdas). The design of several successful libraries (Java Streams, Google Guava) reflect this preference and several languages are evolving in this direction (Rust and Java with pattern matching for example, C++ with lambdas).
+
+Note that I am not recommending slavishly adhering to functional style, merely that functional seems a better default choice than imperative.
 
 <div markdown="1" class="boxyList">
 Resources
 * [Functional vs Imperative Programming](https://learn.microsoft.com/en-us/dotnet/standard/linq/functional-vs-imperative-programming)
 * [Okasaki's Purely Functional Datastructures](https://www.cs.cmu.edu/~rwh/students/okasaki.pdf) is a classic read
+* Phil Bagwell's [Fast And Space Efficient Trie Searches](https://idea.popcount.org/2012-07-25-introduction-to-hamt/triesearches.pdf) inspires Clojure's high performance functional datastructures. A couple of related talks
+* Mohit Thatte's talk: [Deep Dive into Clojure's Data Structures](https://youtu.be/7BFF50BHPPo)
+* Phil Bagwell's talk: [Striving to Make Things Simple And Fast](https://youtu.be/K2NYwP90bNs)
+* [Efficient Immutable Collections PhD thesis](https://michael.steindorfer.name/publications/phd-thesis-efficient-immutable-collections.pdf) and a [corresponding talk](https://www.youtube.com/watch?v=pUXeNAeyY34) claims datastructure performance improvements
+
+In my practice
+* I rely on ideas from [TODO: How I reduce mutability](/TODO)
+
 </div>
 
-## Continuous Releases
+## Releasing
 
-Release often, preferably 4 times a week.
+{:.block-warning}
+> Aim for the ability to release often, preferably 4 times a week, within reason. Not every product needs or even wants (for e.g. financial exchange software) this frequency of releases.
 
-As a WSE, you'll release a lot of features over time. Having a predictable and fast release schedule allows for quick feedback and removal of transient compatibility-related glue. So, you'll need to stay disciplined with continuous releases. Setup your processes to aim for daily releases (except say, Friday & weekends). While it may seem courageous to be releasing everyday, remember that lower frequency releases tend to result in significant amount of cherry picking, compatibility issues and overall lower quality releases.
+As a WSE, you'll release a lot of features over time. Having a predictable and fast release schedule allows for quick feedback and removal of transient compatibility-related glue. So, you'll need to stay disciplined with continuous releases. Ideally, your releases are fully automated on a predictable schedule with the ability to even consider daily releases. While it may seem courageous to be releasing everyday, remember that lower frequency releases tend to result in significant amount of cherry picking, compatibility issues and overall lower quality releases.
+
+
+<div markdown="1" class="boxyList">
+Resources
+* [Github Actions](https://docs.github.com/en/actions)
+</div>
 
 # Backend Systems
 
@@ -164,23 +209,25 @@ As a WSE, you'll need to interface with many backend systems. For example, you m
 
 ## Design Center
 
-Understand the Design Center of backend Systems.
+{:.block-warning}
+>Understand the **Design Center** of backend Systems.
 
 Each backend system has its own `design center`, that is, a purpose where it is a perfect fit. You have to understand the mental models of each of these systems and factor them into your design. In addition, you'll need to understand iterative design. It is not feasible to deliver all the pieces of a design upfront. So, you'll need to monitor some metrics that you know will not be at-target at launch but can be improved over time. The initial design should perhaps favor time to market **without** closing doors on features that didn't make the launch cutoff.
 
-Some standard systems to understand:
-* Scalable Key Value stores: Bigtable, NoSQL but more accurately called No-Transactions.
-* In-memory stores: Redis
-* Big file sytems: Ceph, Google Colossus   
+Some standard system types whose Design Centers you should know about:
+* Scalable Key Value stores: Bigtable, DynamoDb etc.
+* In-memory stores: Redis, MemoryDb etc
+* Big file sytems: Ceph, S3, Google Colossus etc
 * Map-reduce: Cloud Dataflow
-* Real-time processing: Apache Kafka
-* Vertical relational databases: Oracle, MySql
-* Distributed relational databases: Spanner, Cockroachdb
-* Publish Subscribe
+* Real-time processing: Kafka
+* Vertical relational databases: Oracle, Postgresql etc
+* Distributed relational databases: Spanner, Cockroachdb, Yugabytedb etc.
+* Pubsub
 
 ## Design Simplicity
 
-Keep it simple: Bound the complexity
+{:.block-warning}
+> Keep it simple: Bound design complexity. Simplicity is HARD.
 
 One of the most common temptations is to explode the number of tools used. While there are merits to this - `one tool, one purpose` is appealing - complexity increases super-linearly in the number of distinct concepts (or tools) used in an architecture. There's a natural tension between using different tools and using the same tool beyond its design center. For example, one can simulate a simple pub-sub using database tables and some Sql. When to use this vs a real pub-sub system is a judgment call that has to be honed with experience and informed by the circumstances of the current situation. If you have a growing team, adding new concepts doesn't scale well and you'll likely end up with hotspots: a few SWEs who know about all the concepts and everybody else is constantly going to them for information/advice. This dynamic tends to break under its own weight.
 
@@ -188,9 +235,12 @@ Overall, it is important to not overdo systems/tools usage. This judgment takes 
 
 ## Vertical Relational Databases
 
-Understand thoroughly.
+{:.block-warning}
+> Understand every aspect of Relational Databases thoroughly.
 
-Of all the systems you'll encounter as an WSE, Databases are perhaps the most ubiquitous and important. Databases are a **vast** topic and understanding it means forming a mental model by which one can utilize it effectively: for e.g. efficient querying, avoiding inconsistencies, using transactions etc. Vertical databases (like Oracle, PostgreSQL) are still the most common form of database (often with flavors of some replication/sharding).
+One might feel that Vertical RDBMs are legacy and don't apply to WSEs. But, that's far from the truth. Many enterprise systems of large scale run on top of Vertical RDBMSs. Their importance really couldn't be overstated.
+
+Databases are a **vast** topic and understanding it means forming a mental model by which one can utilize them effectively: for e.g. efficient querying, avoiding inconsistencies, using transactions etc. Vertical databases (like Oracle, PostgreSQL) are still the most common form of database (often with flavors of some replication/sharding).
 
 Here are some (non-exhaustive) topics to understand in depth, in no particular order:
 * Indexes & Querying: how a database uses Indexes to query effectively
@@ -202,21 +252,25 @@ Here are some (non-exhaustive) topics to understand in depth, in no particular o
 
 <div markdown="1" class="boxyList">
 Resources
+* [F1 Distributed Query Execution Paper](https://research.google/pubs/f1-a-distributed-sql-database-that-scales/) is a useful primer into how SQL execution works. Even though this is in the distributed setting, vertical dbs work reasonably similarly
+* [Database Systems: The Complete Book](http://infolab.stanford.edu/~ullman/dscb.html). For gaining mastery of databases, it is helpful to complement practical experience with a textbook
 * [Postgres](https://www.postgresql.org/)
-* [F1 Distributed Query Execution Paper](https://research.google/pubs/f1-a-distributed-sql-database-that-scales/) is a useful primer into how SQL execution works. Even though this is in the distributed setting, vertical dbs work similarly
-* [Database Systems: The Complete Book](http://infolab.stanford.edu/~ullman/dscb.html). For gaining mastery of databases, it is helpful to complement practical experience with a more accademic treatment from textbooks.
 </div>
 
 ## Distributed Relational Databases
 
-Develop a mental model.
+{:.block-warning}
+> Develop a mental model for Consistency and appreciate the different bottlenecks (compared to Vertical RDBs) in reads, writes & queries due to their distributed nature.
 
 All the same concerns as Vertical Databases apply, but Distributed Databases (e.g. CockroachDb, Spanner) are noticeably different. For example, consistency models, distributed sql execution, automatic sharding, tracing sql execution etc. make for a different experience using them compared to regular vertical databases.
 
 Their APIs are also different. For example, Spanner due to its external consistency offers a more high fidelity API (one that reflects the distributed nature of it) than a vertical database which also happens to be sharded/replicated.
 
+Distributed Relational Databases are here and they have a reasonable chance of becoming the databases of choice in the future, even potentially nudging out Key-Value stores of most kinds. So, mastering them can be a significant advantage.
+
 <div markdown="1" class="boxyList">
 Resources
+* [Raft Paper](https://raft.github.io/raft.pdf) is a must read for a gentle introduction to Consensus and State Machine Replication
 * [Spanner](https://cloud.google.com/spanner)
 * [Spanner external consistency](https://cloud.google.com/spanner/docs/true-time-external-consistency)
 * [Cockroach DB's consistency model](https://www.cockroachlabs.com/blog/consistency-model/) is a great read into important concerns like Linearizability
@@ -226,11 +280,13 @@ Resources
 * [Hybrid clocks 1](https://www.youtube.com/watch?v=YqNGbvFHoKM) and [Hybrid Clocks 2](https://www.yugabyte.com/blog/evolving-clock-sync-for-distributed-databases/) when atomic clocks like Spanner TrueTime are not available
 * [Herlihy and Wing's Linearizability paper](http://cs.brown.edu/~mph/HerlihyW90/p463-herlihy.pdf)
 * [FaunaDb's commit protocol explained](https://fauna.com/blog/consistency-without-clocks-faunadb-transaction-protocol)
+* [F1 Distributed Query Execution Paper](https://research.google/pubs/f1-a-distributed-sql-database-that-scales/) is a useful primer into how SQL execution works. Even though this is in the distributed setting, vertical dbs work reasonably similarly
 </div>
 
 ## Non-relational Distributed Databases (NoSQL)
 
-Have them in your toolkit and thoroughly understand the trade-offs they present.
+{:.block-warning}
+> Have them in your toolkit and thoroughly understand the trade-offs they present.
 
 As a WSE, you should understand the trade-offs they present: they provide scale by restricting themselves to limited transaction semantics (say only a single key can be atomically updated) and limited SQL query support (which explains NoSql). These limitations can surprise down the line and will present difficult design decisions upfront; for example, often these dbs don't often support transactions across multiple tables; so, schema design can require some denormalization which can cause long-term tech debt. In addition, some kinds of queries either will not be supported or will be slow and this too can be surprising. In other words, if you are early on in your application, it is possible that these stores are not flexible enough to accommodate new access patterns, but for a mature use case one can design reasonable schemas.
 
@@ -244,7 +300,8 @@ Resources
 
 ## In-memory Databases
 
-Be aware of them; uncommon, but some domains require them.
+{:.block-warning}
+> Be aware of them; uncommon, but some domains require them.
 
 Specifically, in the case of real-time writes and reads - for example, real time ad bidding - in memory stores with durable persistence are valuable. The main trade-off is limited scalability since the entire dataset is in memory all the time. So, typical architectures may use them for ephemeral data with some backup to another traditional high-capacity database/warehouse.
 
@@ -256,7 +313,8 @@ Resources
 
 ## Data Warehouses & Lakehouses
 
-Essential for insights. SQL is your friend.
+{:.block-warning}
+> Essential for insights. SQL is your friend.
 
 Data warehouses are typically append-only flexibly structured data. They contain both business data (how many clicks did a particular Ad receive) and application telemetry (how long did a user spend on a form on the webpage). Business metrics, User experience metrics etc are powered by such warehouses.
 
@@ -269,7 +327,8 @@ Resources
 
 ## Object storage
 
-Giant filesystems; understand their performance characteristics.
+{:.block-warning}
+> Object storage ~ Giant filesystems. Understand their performance characteristics.
 
 As a WSE, you will mostly interact with various kinds of high-level data storage systems like databases & warehouses, but occasionally, you'll need a lower level file storage. For example, you want to put a ton of files somewhere, highly available. Object storage is the preferred approach for such use cases. Their design center is around overwrite-few, update-few, read-many-sequentially data.
 
@@ -289,9 +348,10 @@ There are many aspects to performance: throughput, latency & economics to name a
 
 ## Hardware
 
-Know it and make better performance choices.
+{:.block-warning}
+> Know it and make better performance choices.
 
-Even if it is unlikely that an WSE will ever interface directly with hardware, there'll be times that performance matters above all. In such scenarios, it is crucial to understand how hardware works and to write code that is sympathetic to it. In general, you'll be interfacing with high performance libraries rather than writing low level code, but it it still cruical in order to utilize these libraries well.
+Even if it is unlikely that a WSE will ever interface directly with hardware, there'll be times that performance matters above all. In such scenarios, it is crucial to understand how hardware works and to write code that is sympathetic to it. In general, you'll be interfacing with high performance libraries rather than writing low level code, but it it still cruical in order to utilize these libraries well.
 
 In no particular order, it is important to understand:
 * Relative speeds of processor and memory. Latency today is usually determined by cache misses (i.e. processors waiting for memory).
@@ -316,13 +376,17 @@ Resources
 
 ## Multithreading
 
-Master it. Essential in the modern multi-core era.
+{:.block-warning}
+> Master it. Essential in the modern multi-core era.
 
 As a WSE, you have to be familiar concurrency and parallelism. Even though it is unlikely you'll need to write your own primitives, a reasonable under-the-hood understanding is essential for both correct and performant code.
 
 In today's era of shared memory multicore systems, concurrency and parallelism are front and center. Better performance leads to both happier users and better resource footprint (helps bottomline!)
 
-### Concurrency: Know the constructs, limitations and concerns
+### Concurrency
+
+{:.block-warning}
+> Know the constructs, limitations and concerns
 
 Concurrency is about competing for resources as opposed to Parallelism which is about cooperation towards a particular task. Concurrency shows up in many contexts - queues, database transactions to name a couple.
 
@@ -336,7 +400,10 @@ Resources
 * [Martin Thompson: Mechanical Sympathy blog](https://mechanical-sympathy.blogspot.com/)
 </div>
 
-### Parallelism: Think parallel when appropriate
+### Parallelism 
+
+{:.block-warning}
+Think parallel when appropriate; the benefits can be large.
 
 Parallelism is about exploiting cooperation among resources towards a particular task. Like with concurrency, getting top performance requires an understanding of hardware. For example, exploiting the single writer principle (each cache-line should be written only from one core) and exploiting the fact that a modern processor has many ALUs so it can do multiple add/multiplies simultaneously; i.e. each core itself has inbuilt parallelism and high performance code needs to exploit it.
 
@@ -351,7 +418,10 @@ Resources
 * [Java Virtual Threads used like GoRoutines in the Game of Life](https://youtu.be/n8uGsc4y6W4)
 </div>
 
-### Memory Models: Develop a mental model
+### Memory Models
+
+{:.block-warning}
+> Develop a mental model. Necessary for writing correct multi-threaded code.
 
 Writing *correct* concurrent code is hard. A non-trivial reason for its hardness comes from the non-intuitive behaviors of shared memory accessed from mutliple hardware threads (typically one or two hardware threads per core). A memory model specifies acceptable behaviors. Even after understanding a memory model, proving a piece of concurrent code as correct is non-trivial. Even though memory models originated as a hardware concern, they've worked their way up to high level programming languages like Java and C++ in multithreaded contexts. They determine semantics when multiple language threads communicate via shared memory.
 
@@ -367,18 +437,10 @@ Resources
 * [TODO: Mental models for Memory Models & Consistency](TODO)
 </div>
 
-### Misc topics
-
-There are several other topics in the general area of multithreading. The more one's coverage extends, the easier it is to grok newer topics. For example, there are remarkable similarities between optimistic transactions in a database and lock-free compare-and-swap based shared memory concurrent datastructures.
-
-While a deeper understanding is not necessary for an WSE, it is potentially helpful to know ancilliary topics like Lock free datastructures and Hardware primitives like CAS and/or Fetch-and-add.
-
-<div markdown="1" class="boxyList">
-Resources
-* [Lock free queue](https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf)
-</div>
-
 ## Latency
+
+{:.block-warning}
+> Worth digging into at least once, preferably earlier in your career.
 
 Latency engineering is a different ball game compared to throughput engineering. It is unlikely for WSEs to look at cycle count. In some specific industries like High-Frequency-Trading, latencies matter tremendously. There, you'll have to go deep and optimize for even seemingly minor gains. For example, you'll pay attention to page faults, TLB cache misses, tune page sizes (huge pages?) etc.
 
@@ -390,7 +452,23 @@ Resources
 * [Java Async Profiler](https://github.com/async-profiler/async-profiler). The [videos](https://www.youtube.com/playlist?list=PLNCLTEx3B8h4Yo_WvKWdLvI9mj1XpTKBr) are even better
 </div>
 
-# APIs: A vast topic that can only be learnt in the field
+## Misc topics
+
+{:.block-warning}
+> There is no end of topics on a need-to-learn basis.
+
+There are several other topics in the general area of performance that we didn't cover earlier. The more one's coverage extends, the easier it is to grok newer topics. For example, there are remarkable similarities between optimistic transactions in a database and lock-free compare-and-swap based shared memory concurrent datastructures. While a deeper understanding is not necessary for a WSE, it is potentially helpful to know ancilliary topics.
+
+<div markdown="1" class="boxyList">
+Resources
+* [Lock free queue](https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf)
+* [SPDK](https://spdk.io/) is for high-performance storage using user-space polled NVME driver
+* [NVME](https://nvmexpress.org/) a protocol optimized for SSD
+* [DPDK](https://www.dpdk.org/)  for high performance network packet processing
+* [Zero copy Networking](https://en.wikipedia.org/wiki/Zero-copy)
+</div>
+
+# APIs
 
 APIs really are a vast topic and I will only be scatching the surface here. APIs come in  many forms: internal library APIs consumed by your application code and external APIs consumed by a browser or external clients. While some considerations are different between internal and external APIs, a vast majority of principles apply to them both.
 
@@ -416,7 +494,10 @@ More than the details, it is important to understand the ideas behind the layere
 
 The details do matter to some degree; for example, you should be familiar with headers vs payload
 
-## TCP/IP: Know it well
+## TCP/IP
+
+{:.block-warning}
+> Understand the basic contract and contrast with UDP.
 
 ## HTTP: The workhorse
 
@@ -563,7 +644,7 @@ With PMs, the focus of your conversations will be on product and customer requir
 
 Sometimes WSEs will interface with customers directly to learn their pain points. If you do get the chance, lean in and really understand how customers use the product. If you don't get given the chance, ask for it. Listening to customers first hand will connect the dots between your technical work and customer value. More importantly, it helps you get a sense of relative priorities of customers. For example, should you spend time towards reducing the latency of your service or towards providing a more understandable error message when something goes wrong? Understanding the customer perspective helps you better make micro decisions like this one.
 
-### Difficult people
+### Difficult colleagues
 
 It is likely you'll have some colleagues who can be characterized as 'difficult'. Have a strategy to collaborate effectively with them despite the difficulties.
 
