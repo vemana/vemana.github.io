@@ -20,7 +20,15 @@ I want to run some Java JUnit tests in parallel while retaining one-time static 
 * I want the test cases to run in parallel
 * Run under Bazel and JUnit4
 
-## Options
+Contrast with the standard `JUnit4` Runner which executes all the tests serially in the same thread:
+* The thread Executes the static `@BeforeClass void spinupDb()`
+* Thereafter, the thread runs each test in serial
+
+The primary motivation to consider parallel runs is to quicken the test feedback cycle.
+
+---
+
+## Options & Decision
 
 Suppose I have 20 test cases and one db spin up (in a one-time, static, setup method) in my test class.
 
@@ -32,12 +40,14 @@ The primary options are:
   * Each test shard will spin up the database and then run each of its 4 tests in serial
   * Time to completion = Db spin up time + time to complete 4 tests
 * Use JUnit's experimental [Parallel Computer](https://github.com/junit-team/junit4/blob/main/src/main/java/org/junit/experimental/ParallelComputer.java). This meets the spec except that JUnit doesn't expose a runner like `ParallelRunner`.
+  * Time to completion = Db spin up time + time to complete `20/T` tests where `T` is the number of parallel threads
 * Roll my own, inspired by `Parallel Computer`
   * And take the opportunity to run using Virtual Threads !
+  * Time to completion = Db spin up time + time to complete 1 test
 
-## My choice
+I chose to roll a new parallel Runner because it meets the spec and I can also use Virtual Threads.
 
-I chose to roll a new `ParallelRunner` because it meets the spec and I can also use Virtual Threads.
+---
 
 ## Why Virtual Threads?
 
@@ -60,7 +70,7 @@ In some situations, Virtual Threads can support more load per core
   * Each of the 200 threads is blocked for 199 units, does 1 unit of work and repeats the cycle
 * Suppose the core can support a max of 100 Platform Threads and 10,000 Virtual Threads
 * To obtain a queue size of 200, you'll need two cores running Platform Threads vs 1 core running Virtual Threads
-* <span style="color:green; font-weight:bold;">In other words, you need fewer servers using VTs to support the same workload</span>
+* <span style="color:green; font-weight:bold;">In other words, you need fewer servers using Virtual Threads to support the same workload</span>
 
 If you have 10 testing boxes running integration tests, it's plausible you can cut down on a couple using Virtual Threads because
 * Integration tests with databases could have similar characteristics as the example above
@@ -71,8 +81,9 @@ If you have 10 testing boxes running integration tests, it's plausible you can c
 {:.block-warning}
 > Bottomline: Virtual Threads are worth a try for integration tests.
 
+---
 
-## Solution
+## Code
 
 This is how the test looks. Note the following:
 * A new Runner, `ParallelTestMethodsRunner`
@@ -97,9 +108,9 @@ public class MyDbTest {
 }
 ```
 
-The Runner is fairly trivial to implement based on JUnit's `Parallel Computer`.
+---
 
-{% details Click here for Java Code of ParallelTestMethodsRunner and ParallelTestMethodsConfig %}
+The Runner is fairly trivial to implement based on JUnit's `Parallel Computer`.
 
 
 ```java
@@ -187,4 +198,3 @@ public class ParallelTestMethodsRunner extends BlockJUnit4ClassRunner {
 }
 
 ```
-{% enddetails %}
