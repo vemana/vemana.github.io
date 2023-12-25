@@ -85,16 +85,13 @@ If you have 10 testing boxes running integration tests, it's plausible you can c
 
 ## Code
 
-This is how the test looks. Note the following:
-* A new Runner, `ParallelTestMethodsRunner`
-* The test configuration `ParallelTestMethodsConfig` which supports two options
-  * Run using Platform Threads (for CPU bound tests)
-  * Run using Virtual Threads (for IO bound tests)
+This is how the test looks. 
 
 ```java
-@RunWith(ParallelTestMethodsRunner.class) /*The Runner*/
-// @ParallelTestMethodsConfig(platformThreads = 10) // Option 1: Use 10 Platform Threads
-@ParallelTestMethodsConfig(useVirtualThreads = true) // Option 2: Use Virtual Threads
+// @ParallelTestMethodsConfig(platformThreads = 10)   // Option 1: Use 10 Platform Threads
+// @ParallelTestMethodsConfig(platformThreads = -1)   // Option 2: Use unbounded Platform Threads
+@ParallelTestMethodsConfig(useVirtualThreads = true)  // Option 3: Use Virtual Threads
+@RunWith(ParallelTestMethodsRunner.class)
 public class MyDbTest {
 
   // Spins up the database; shared by each test case
@@ -109,7 +106,13 @@ public class MyDbTest {
 ```
 
 ---
+Note the following:
+* A new Runner, `ParallelTestMethodsRunner`
+* The test configuration `ParallelTestMethodsConfig` which supports two options
+  * Run using Platform Threads (for CPU bound tests)
+  * Run using Virtual Threads (for IO bound tests)
 
+---
 The Runner is fairly trivial to implement based on JUnit's `Parallel Computer`.
 
 
