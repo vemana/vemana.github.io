@@ -94,14 +94,24 @@ This is how the test looks.
 @RunWith(ParallelTestMethodsRunner.class)
 public class MyDbTest {
 
-  // Spins up the database; shared by each test case
+  // Runs once per test class, ahead of any test case.
+  // Spins up the database.
+  // `dbTestCase` field is shared and used by all the test cases.
   @ClassRule
   public static final DbTestCase dbTestCase = DbTestCase.postgres_15_3();
 
-  @Test public void test_1() {}
-  @Test public void test_2() {}
+  // Runs once per test case.
+  // Different tests use different 'database' (as in `USE DATABASE D;` of MySql)
+  // to avoid mutual interference.
+  // Creates a new 'database' and creates tables in them, ready for the test
+  // to use.
+  @Rule
+  public SchemaApplier schemaApplier = new SchemaApplier(dbTestCase);
+
+  @Test public void test_1() {...}
+  @Test public void test_2() {...}
   // ...
-  @Test public void test_20() {}
+  @Test public void test_20() {...}
 }
 ```
 
