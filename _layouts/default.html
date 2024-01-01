@@ -60,5 +60,11 @@
     {% include scripts/analytics.html %}
     {% include scripts/progressBar.html %}
     {% include scripts/wechatModal.html %}
+
+    <!-- Custom Javascript -->
+    {% for extra_js in page.extra_js -%}
+      {%- assign js_file = '/assets/js/posts/' | append: extra_js | append: '.js' -%}
+      <script defer src="{{ js_file | relative_url | bust_file_cache }}"></script>
+    {% endfor %}
   </body>
 </html>

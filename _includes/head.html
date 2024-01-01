@@ -38,7 +38,7 @@
     {% endif %}
 
     {% for extra_css in page.extra_css -%}
-    {%- assign css_file = '/assets/css/' | append: extra_css | append: '.css' -%}
+    {%- assign css_file = '/assets/css/posts/' | append: extra_css | append: '.css' -%}
       <!-- Page/Post style -->
       <link rel="stylesheet" href="{{ css_file | relative_url | bust_file_cache }}">
     {% endfor %}

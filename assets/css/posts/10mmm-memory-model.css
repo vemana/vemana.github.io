@@ -1,0 +1,66 @@
+@scope(.multiThreadedProgram) {
+  :scope {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: monospace,monospace;
+    border: 5px solid rebeccapurple;
+    margin-bottom: 20px;
+    maring-top: 10px;
+  }
+
+  & span.title {
+    text-align: center;
+    color: rebeccapurple;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  & .multiThreadedProgramContainer {
+    display: flex;
+    flex-direction: row;
+  }
+
+  & .singleThread {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 5px;
+  }
+
+  & .singleThread span {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    max-width: 400px;
+  }
+
+  & .singleThread span.header {
+    border-bottom: 1px dashed grey;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.25em;
+  }
+
+  & .singleThread span.instr {
+    background-color: unset;
+    padding: 0px;
+    border: 0px;
+  }
+
+  & .singleThread span.instr.red {
+    color: red;
+  }
+
+  & .singleThread span.instr.green {
+    color: green;
+    font-weight: bold;
+  }
+
+  & .singleThread span.emptyInstr {
+    background-color: unset;
+    min-height: 1.5em;
+    padding: 0px;
+    border: 0px;
+  }  
+}
+
