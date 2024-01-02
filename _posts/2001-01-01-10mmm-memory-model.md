@@ -31,12 +31,12 @@ Alex is writing a single producer single consumer [Synchronous Queue](https://do
 * Two threads, one producer and one consumer, running on separate cores
 * Shared memory system (i.e. programs write load/store to memory as opposed to async networks ala distributed systems)
 
-... where the **Producer** and **Consumer** loop like so (slot = EMPTY initially)
+... where the **Producer** and **Consumer** loop like so (slot = EMPTY initially, counter = 0 initially)
 
 {: .monospace}
 Producer(in a loop) | Consumer(in a loop)
 --- | ----
-x = random();<br>slot=FULL;<br>while(slot == FULL) {} | while(slot == EMPTY) {} <br> print(x); <br> slot = EMPTY;
+x = ++counter;<br>slot=FULL;<br>while(slot == FULL) {} | while(slot == EMPTY) {} <br> print(x); <br> slot = EMPTY;
 
 **Expected** | **Reality**
 --- | ---
@@ -233,12 +233,12 @@ Alex now writes a queue that works across all the hardware models:
 
 Producer (in a loop) | Consumer (in a loop)
 ---- | ----
-while(slot == FULL){} <br><span class="good">LoadStore Barrier</span> <br>x = random() <br><span class="good">StoreStore Barrier</span> <br>slot = FULL | while (slot == EMPTY) {} <br><span class="good">LoadLoad Barrier</span> <br>print(x) <br><span class="good">LoadStore barrier</span> <br> slot = EMPTY
+while(slot == FULL){} <br><span class="good">LoadStore Barrier</span> <br>x = ++counter <br><span class="good">StoreStore Barrier</span> <br>slot = FULL | while (slot == EMPTY) {} <br><span class="good">LoadLoad Barrier</span> <br>print(x) <br><span class="good">LoadStore barrier</span> <br> slot = EMPTY
 
 Why does this work? 
 
 First, **notice the parallels to a locking implementation**. Pretend that the check `while(slot == EMPTY){}` to be a lock acquire and `slot = EMPTY` to be a lock release. Similiary with `while(slot == FULL){}` and `slot = FULL`. So, 
-  * We can be convinced that `x = random()` is never concurrently executing with `print(x)`. That is, what is read for printing will always be something written in a previous slot
+  * We can be convinced that `x = ++counter` is never concurrently executing with `print(x)`. That is, what is read for printing will always be something written in a previous slot
   * Similarly, the lock acquisition takes turns. Neither Producer nor Consumer can acquire the lock twice in succession. So, we can be convinced that every value from the Producer will be seen by the Consumer
 
 Second, let's see how the barriers prevent bad reorderings.
