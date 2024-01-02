@@ -12,7 +12,6 @@ function addSpan(root, spanKlass, textContent) {
 }
 
 class MultiThreadedProgramElement extends HTMLElement {
-  static observedAttributes = [];
 
   constructor() { super(); }
 
