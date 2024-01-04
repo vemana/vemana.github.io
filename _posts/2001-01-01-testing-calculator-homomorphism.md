@@ -5,7 +5,7 @@ date: 2023-10-20 15:00:00
 description: How many tests to write? What tests to write? Can there be objective answers? Surprisingly, the answer is yes for a certain class of programs.
 tags: software-testing
 categories: software-engineering
-featured: false
+featured: true
 giscus_comments: false
 toc:
   beginning: true

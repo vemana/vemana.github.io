@@ -5,7 +5,7 @@ date: 2023-11-19 15:00:00
 description: "Many skillsets required. Some only learnable from practice."
 tags: software-abiyz
 categories: software-engineering
-featured: false
+featured: true
 giscus_comments: false
 published: true
 toc:

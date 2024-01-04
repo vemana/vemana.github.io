@@ -5,7 +5,7 @@ date: 2023-11-19 15:00:00
 description: "A deep introspection of how we use arithmetic reveals a powerful pattern for programming."
 tags: software-abiyz
 categories: software-engineering
-featured: false
+featured: true
 giscus_comments: false
 toc:
   beginning: true

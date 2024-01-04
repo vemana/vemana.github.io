@@ -5,7 +5,7 @@ date: 2023-12-25 15:00:00
 description:
 tags: software-concurrency
 categories: software-engineering 10-minute-mental-models
-featured: false
+featured: true
 published: true
 giscus_comments: false
 extra_js: 10mmm-memory-model
