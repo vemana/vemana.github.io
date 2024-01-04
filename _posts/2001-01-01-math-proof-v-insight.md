@@ -32,14 +32,25 @@ Then, the probability that an infinite number of events occur is $$0$$.
 
 ---
 ### Reminder: Axioms of Probability Spaces
-Axioms
-1. $$ P (S = \text{entire sample space}) = 1$$ [Full space probability]
-1. $$0 \le P(A) \le 1$$ where $$A$$ is a measurable subset of $$S$$. For the purposes of this post, we can safely ignore the adjective 'measurable'
-1. If $$E_n, n \ge 1$$ are mutually disjoint events (i.e. $$E_i \cap E_j = \phi$$ for $$i \neq j$$), then $$P(\cup_{n=1}^\infty E_n) = \sum_{n=1}^\infty P(E_n)$$
+Events and Sample space
+1. Imagine a set called sample space, say $$S$$
+  * Example: Think of each element of $$S$$ as a potential outcome of an experiment, like "TTT" or "THT" from "tossing a coin exactly 3 times"
+1. Events = subsets of sample space
+  * Example: Event1 = first and second coin tosses produce the same result = $$\{TTT, TTH, HHT, HHH\}$$
+  * Example: Event2 = all coin tosses have the same result = $$\{TTT, HHH\}$$
+  * Example: Event3 = number of heads is equal to 2 = $$\{THH, HTH, HHT\}$$
+1. What are the possible events?
+  * [Everything] The full sample space, $$S$$
+  * [Complement] If $$X$$ is an event, $$S \setminus X$$ is an event
+  * [Closed under Countable Union] If $$X_1, X_2, ...$$ all are events, their union $$\cup_{n=1}^\infty X_n$$ is also an event
+1. Probability is defined on events
+  * $$ P(S) = 1$$ where $$S$$ is the sample space
+  * $$0 \le P(A) \le 1$$ where $$A$$ is an event
+  * If $$E_n, n \ge 1$$ are mutually disjoint events (i.e. $$E_i \cap E_j = \phi$$ for $$i \neq j$$), then $$P(\cup_{n=1}^\infty E_n) = \sum_{n=1}^\infty P(E_n)$$
 
 Corollaries
 1. $$A \subseteq B \implies P(A) \le P(B)$$
-1. $$ P (\overline A) = 1 - P(A) $$
+1. $$ P (S \setminus A) = 1 - P(A) $$
 1. When $$E_i$$ are mutually disjoint, $$P (\cup_{n=1}^k E_n) = \sum_{n=1}^k P(E_n)$$
 1. $$  P(\cup_{n=1}^\infty E_n) \leq \sum_{n=1}^\infty P(E_n) $$
 1. If $$E_n$$ is a decreasing (or increasing) sequence of events, $$ P(\lim_\limits{n \to \infty} E_n) = \lim_\limits{n \to \infty} P(E_n) $$. Increasing sequence of events means $$E_n \subseteq E_{n+1}$$ and Decreasing sequence of events means $$E_n \supseteq E_{n+1}$$.
