@@ -18,7 +18,7 @@ _styles: |
 
 I think Math - and in general logic too - education can really improve on some axes. A thorough analysis of the ills are beyond the scope of this blog. But, I felt compelled to write this post after recently coming across a textbook proof of a theorem. It was cool and elegant, but offered no real insight. Readers can think of it as a cool trick rather than something they can actually reason and arrive at themselves.
 
-Once upon a time, I was that student and accepted remembering cool tricks. I was decent at solving problems but knew that I didn't always have insight and it bugged me. Over the years, I've revisited some topics focused on insight and as a result, I now see math differently (though limited by my relatively modest capabilities). As an example of this **insight-over-tricks** mentality, see a fruitful reasoning on [this IMO problem](/blog/2024/math-fxy-imo2022). Of course, this is not a universal technique and cool tricks have their place, but insight probably trumps tricks. I hope to contribute more weight to that thought with this post.
+Once upon a time, I was that student and accepted remembering cool tricks. I was decent at solving problems but knew that I didn't always have insight and it bugged me. Over the years, I've revisited some topics focused on insight and as a result, I now see math differently (though limited by my relatively modest capabilities). As an example of this **insight-over-tricks** mentality, see a fruitful reasoning on [this IMO problem](/blog/2023/math-fxy-imo2022). Of course, this is not a universal technique and cool tricks have their place, but insight probably trumps tricks. I hope to contribute more weight to that thought with this post.
 
 ---
 ### Problem : The Borel Cantelli Lemma
