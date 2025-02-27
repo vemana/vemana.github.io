@@ -21,9 +21,11 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Welcome to Vemana's Space. I am Subrahmanyam, a Staff Software Engineer at Google. This is where I write about anything that catches my fancy. Usual suspects are Software Engineering, Math, Life & Laughter. I am particularly interested in reducing human intensity of software development by 100x.
+**Welcome!** I am Subrahmanyam and this is my writing space. I write about anything that catches my fancy. Usual suspects are Software Engineering, Math & Finance.
 
-All opinions are my own and offered without guarantee.
+In a previous life, I was a Software Engineer at Google where I TLed infrastructure for the second largest ad frontend, Google Ad Manager. At some point, I was also an assistant researcher at Microsoft Research in the Rigorous Software Engineering group. I also dabbled in *Competitive Programming* before the term was coined and was a World Finalist at Google Code Jam, at Topcoder Open & Collegiate Challenge.
+
+I am an avid fan of test match cricket (where each game is 5 days) being the game that most closely resembles the swings and roundabouts of life itself. I've learnt many a life lesson watching it. I also read a fair amount of math history and found the history of Euler's Gamma function, of Calculus, of *i* to be gripping reads.
 
 ## What's **Vemana**? 
 <a href="https://en.wikipedia.org/wiki/Vemana">Vemana</a> is a Telugu poet particularly known for short, rythmic, life-lesson poems. His most famous work is **Vemana Sathakam** comprising 100 poems each of which is 3 short lines long completed by a final 4th signature line.

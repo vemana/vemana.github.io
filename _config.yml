@@ -268,7 +268,7 @@ jekyll-archives:
     category: '/blog/category/:name/'
 
       #display_tags: ['software-testing', 'software-aging'] # these tags will be displayed on the front page of your blog
-display_categories: ['software-engineering', 'math', 'finance'] # these categories will be displayed on the front page of your blog
+display_categories: ['10-minute-mental-models', 'software-engineering', 'math', 'finance'] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar

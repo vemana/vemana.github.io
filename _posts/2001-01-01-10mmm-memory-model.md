@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Hardware Memory Models: 10 Minute Mental Model'
+title: '10 Minute Mental Model: Hardware Memory Models'
 date: 2023-12-25 15:00:00
 description:
 tags: software-concurrency
